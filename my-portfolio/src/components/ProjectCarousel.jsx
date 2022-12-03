@@ -15,13 +15,14 @@ function ProjectCarousal() {
       className="carousel"
       activeIndex={index}
       onSelect={handleSelect}
+      style={{width:"98%",margin:"auto",borderRadius:"20px",paddingBottom:"40px",boxShadow: "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px"}}
     >
-      <Carousel.Item style={{ width: "100%", height: "520px",borderBottom:"none" }}>
+      <Carousel.Item style={{ width: "100%", height: "470px",borderBottom:"none" }}>
         <div
           style={{
             display: "flex",
             alignItmes: "center",
-            justifyContent: "center",
+            justifyContent: "space-around",
             width: "90%",
             height: "520px",
             margin: "auto",
@@ -63,7 +64,6 @@ function ProjectCarousal() {
             />
           </div>
           <div
-            data-aos="fade-left"
             style={{
               display: "flex",
               alignItmes: "center",
@@ -93,12 +93,12 @@ function ProjectCarousal() {
         </div>
       </Carousel.Item>
       {/* https://camo.githubusercontent.com/98a803e91fb0e963e04d9022582ba052e12e34bde89fb07b21835da776dafa1a/68747470733a2f2f692e706f7374696d672e63632f564c334e6b584b4c2f696e6469616e2d657870726573732d636c6f6e652d312e706e67 */}
-      <Carousel.Item style={{ width: "100%", height: "520px",borderBottom:"none" }}>
+      <Carousel.Item style={{ width: "100%", height: "470px",borderBottom:"none" }}>
         <div
           style={{
             display: "flex",
             alignItmes: "center",
-            justifyContent: "center",
+            justifyContent: "space-around",
             width: "90%",
             height: "520px",
             margin: "auto",
