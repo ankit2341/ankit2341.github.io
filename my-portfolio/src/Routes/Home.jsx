@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Aos from "aos";
 import "aos/dist/aos.css";
-// import {Link} from "react-router-dom";
-import { ProjectCarousal } from "../components/ProjectCarousel";
-// import logo from '../../public/logo.png';
+import NextCarousal from "../components/nextCarousel";
+import IpadCarousal from "../components/ipad";
+import GitHubCalendar from "react-github-calendar";
+import MobileCarousal from "../components/mobile";
+import ReactTooltip from "react-tooltip";
 
 const logourl = [
   "data:image/png;base64,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",
@@ -46,16 +48,32 @@ const Home = () => {
       setActive("skills");
       setNavbg(false);
       setNavname(false);
-    } else if (scrool >= 2160 && scrool < 2880) {
+    } else if (scrool >= 2160 && scrool < 3300) {
       setActive("project");
       setNavbg(false);
       setNavname(false);
-    } else if (scrool >= 2880 && scrool < 3600) {
+    } else if (scrool >= 3300 && scrool < 4020) {
       setActive("contact");
       setNavbg(false);
       setNavname(false);
     }
     // setScrollPosition(position);
+  };
+  const selectLastHalfYear = (contributions) => {
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
+    const shownMonths = 6;
+
+    return contributions.filter((day) => {
+      const date = new Date(day.date);
+      const monthOfDay = date.getMonth();
+
+      return (
+        date.getFullYear() === currentYear &&
+        monthOfDay > currentMonth - shownMonths &&
+        monthOfDay <= currentMonth
+      );
+    });
   };
 
   useEffect(() => {
@@ -90,7 +108,11 @@ const Home = () => {
         <a href="#about" className={active == "about" ? "active1" : "none"}>
           About
         </a>
-        <a href="#" className={active == "resume" ? "active1" : "none"}>
+        <a
+          href="https://drive.google.com/uc?export=download&id=1O08b_qbSyWhN_ZNnGt_L79u5_USMEnGq"
+          download
+          className={active == "resume" ? "active1" : "none"}
+        >
           Resume
         </a>
         <a href="#skills" className={active == "skills" ? "active1" : "none"}>
@@ -127,7 +149,11 @@ const Home = () => {
           <a href="#about" className={active == "about" ? "active" : "none"}>
             About
           </a>
-          <a href="#resume" className={active == "resume" ? "active" : "none"}>
+          <a
+            href="https://drive.google.com/uc?export=download&id=1O08b_qbSyWhN_ZNnGt_L79u5_USMEnGq"
+            download
+            className={active == "resume" ? "active" : "none"}
+          >
             Resume
           </a>
           <a href="#skills" className={active == "skills" ? "active" : "none"}>
@@ -195,7 +221,16 @@ const Home = () => {
             <div class="container">
               <div class="typed-out">I am a Web Developer.</div>
             </div>
-            <button className="all_btn">Download Resume</button>
+            <button className="all_btn">
+              {" "}
+              <a
+                href="https://drive.google.com/uc?export=download&id=1O08b_qbSyWhN_ZNnGt_L79u5_USMEnGq"
+                download
+              >
+                {" "}
+                Download Resume
+              </a>
+            </button>
             <a href="#about">
               <img
                 src="https://content.invisioncic.com/p289038/monthly_2020_05/Bounce-arrow.gif.ab5ac6f311d13c20c4a6d256178344bf.gif"
@@ -223,84 +258,6 @@ const Home = () => {
                 ability to follow industry and technological trends, and
                 facilitating early adoption of innovations.
               </p>
-              {/* <ul style={{ width: "90%", lineHeight: "2", marginTop: "30px" }}>
-                <li class="d-flex">
-                  <span style={{ fontWeight: "bolder", color: "#000000" }}>
-                    Name:
-                  </span>{" "}
-                  <span>Ankit Patil</span>
-                </li>
-                <li class="d-flex">
-                  <span style={{ fontWeight: "bolder", color: "#000000" }}>
-                    Date of birth:
-                  </span>{" "}
-                  <span>June 26, 2000</span>
-                </li>
-                <li class="d-flex">
-                  <span style={{ fontWeight: "bolder", color: "#000000" }}>
-                    Address:
-                  </span>{" "}
-                  <span>Kopargaon ,Maharashtra ,India</span>
-                </li>
-                <li class="d-flex">
-                  <span style={{ fontWeight: "bolder", color: "#000000" }}>
-                    Pin code:
-                  </span>{" "}
-                  <span>423601</span>
-                </li>
-                <li class="d-flex">
-                  <span style={{ fontWeight: "bolder", color: "#000000" }}>
-                    Email:
-                  </span>{" "}
-                  <span>ankitpatil2341@gmail.com</span>
-                </li>
-                <li class="d-flex">
-                  <span style={{ fontWeight: "bolder", color: "#000000" }}>
-                    Phone:{" "}
-                  </span>{" "}
-                  <span>+91-7972592414</span>
-                </li>
-              </ul> */}
-
-              {/* <div className="d-flex btn_div" style={{ marginTop: "30px" }}>
-                <button className="all_btn">Download Resume</button>
-                <a href="https://github.com/ankit2341" target="_blank">
-                  <button className="all_git_btn">
-                    <span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 496 512"
-                        width="40"
-                        height="40"
-                        fill="#ffffff"
-                      >
-                        <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
-                      </svg>
-                    </span>{" "}
-                    <span style={{ marginLeft: "10px" }}> Github</span>
-                  </button>
-                </a>
-
-                <a
-                  target="_blank"
-                  href="http://www.linkedin.com/in/ankit-patil-948036196"
-                >
-                  <button className="all_link_btn">
-                    <span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 448 512"
-                        width="40"
-                        height="40"
-                        fill="#ffffff"
-                      >
-                        <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z" />
-                      </svg>
-                    </span>{" "}
-                    <span style={{ marginLeft: "10px" }}> LinkedIn</span>
-                  </button>
-                </a>
-              </div> */}
             </div>
           </div>
         </section>
@@ -318,7 +275,14 @@ const Home = () => {
           <div className="skill_grid" data-aos="fade-up">
             {logourl.map((el) => {
               return (
-                <div className="move-up">
+                <div
+                  className="move-up"
+                  style={{
+                    padding: "10px 10px",
+                    boxShadow:
+                      "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+                  }}
+                >
                   <img src={el} alt={el} />
                 </div>
               );
@@ -336,7 +300,19 @@ const Home = () => {
           >
             My Projects
           </h1>
-          <ProjectCarousal />
+          {/* <ProjectCarousal /> */}
+          <div className="check_big_size">
+            <NextCarousal />
+          </div>
+
+          <div className="check_ipad">
+            <IpadCarousal />
+          </div>
+
+          <div className="check_mobile">
+            <MobileCarousal />
+          </div>
+
           <button
             className="all_git_btn"
             style={{ margin: "auto", marginTop: "15px", paddingRight: "15px" }}
@@ -344,6 +320,50 @@ const Home = () => {
             <Link to="/projects">View All</Link>
           </button>
         </section>
+        <div
+          style={{ margin: "auto", marginTop: "50px" }}
+          className="git_calendar"
+        >
+          <div className="git_calendar_div">
+            <GitHubCalendar
+              username="ankit2341"
+              blockSize={20}
+              fontSize={20}
+              transformData={selectLastHalfYear}
+              color="#3e64ff"
+            >
+              <ReactTooltip delay={20} html />
+            </GitHubCalendar>
+          </div>
+        </div>
+        <div
+          style={{ margin: "auto", marginTop: "50px", opacity: "0.8" }}
+          className="git_contri"
+        >
+          <a href="https://github.com/ankit2341">
+            {" "}
+            <img
+              src="https://github-readme-streak-stats.herokuapp.com?user=ankit2341&hide_border=true&theme=sea"
+              alt=""
+            />
+          </a>
+        </div>
+
+        <div className="github_lang">
+          <a href="https://github.com/ankit2341">
+            <img
+              src="https://github-readme-stats.vercel.app/api/top-langs/?username=ankit2341"
+              alt="top languages"
+            />
+          </a>
+          <a href="https://github.com/ankit2341">
+            {" "}
+            <img
+              src="https://github-readme-stats.vercel.app/api?username=ankit2341"
+              alt=""
+            />
+          </a>
+        </div>
 
         <section id="contact" className="contact">
           <div class="contact-header">
@@ -462,7 +482,9 @@ const Home = () => {
 
               <a href="#about">About</a>
 
-              <a href="#">Resume</a>
+              <a href="https://drive.google.com/uc?export=download&id=1O08b_qbSyWhN_ZNnGt_L79u5_USMEnGq">
+                Resume
+              </a>
 
               <a href="#skills">Skills</a>
 

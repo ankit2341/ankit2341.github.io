@@ -395,11 +395,11 @@ a {
 }
 .skill_grid img{
   background: #ffffff;
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
 }
 .move-up:hover{
-  background: #000000;
+  /* background: #3e64ff; */
   transition: all .5s;
   transform : translateY(-10px);
 }
@@ -948,8 +948,26 @@ textarea, #message {
 #contact{
   font-family: "Montserrat", sans-serif;
 }
+.check_mobile{
+  display: none;
+}
+.check_ipad{
+  display: none;
+}
+.git_calendar .git_calendar_div{
+  margin-left: 500px;
+}
+.git_contri img{
+  margin-left: 35%;
+}
+.github_lang{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
 
-@media only screen and (max-width: 820px) {
+@media only screen and (max-width: 912px) {
   *{
     margin: 0px;
     padding: 0px;
@@ -957,6 +975,30 @@ textarea, #message {
     /* min-width: 100%; */
     zoom:0fr;
 
+  }
+  .git_calendar .git_calendar_div{
+     margin-left: 120px;
+  }
+  .git_contri img{
+    margin-left: 20%;
+  }
+  .github_lang{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  #project{
+    height: 1500px;
+  }
+  .check_big_size{
+    display: none;
+  }
+  .check_mobile{
+    display: none;
+  }
+  .check_ipad{
+    display: block;
   }
   .footer-distributed{
 		font: bold 14px ;
@@ -1055,11 +1097,11 @@ textarea, #message {
   }
   .skill_grid img{
     background: #ffffff;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
   }
   .move-up:hover{
-    background: #000000;
+    /* background: #3e64ff; */
     transition: all .5s;
     transform : translateY(-10px);
   }
@@ -1239,6 +1281,43 @@ textarea, #message {
   *{
     width: auto;
   }
+  .git_calendar .git_calendar_div{
+    display: none;
+    /* margin-left: 0px; */
+  }
+  .git_contri img{
+    margin-left: 0%;
+  }
+  .github_lang{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 50px;
+  }
+  #project{
+    height: 1500px;
+  }
+  .check_mobile{
+    display: block;
+  }
+  .check_big_size{
+    display: none;
+  }
+  .check_ipad{
+    display: none;
+  }
+  .all_git_btn{
+    width: 130px;
+    height: 30px;
+    font-size: medium;
+  }
+  .all_link_btn{
+    width: 130px;
+    height: 30px;
+    font-size: medium;
+    margin-right: 30px;
+  }
   .navigation {
     display: none;
   }
@@ -1327,11 +1406,11 @@ display: none;
   }
   .skill_grid img{
     background: #ffffff;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
   }
   .move-up:hover{
-    background: #000000;
+    /* background: #3e64ff; */
     transition: all .5s;
     transform : translateY(-10px);
   }

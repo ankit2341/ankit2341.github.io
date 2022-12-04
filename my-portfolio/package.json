@@ -13,11 +13,15 @@
     "aos": "^2.3.4",
     "bootstrap": "^5.2.3",
     "framer-motion": "^7.6.12",
+    "github-calendar": "^2.3.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
     "react-dom": "^18.2.0",
+    "react-github-calendar": "^3.4.0",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "react-tooltip": "^4.5.1",
+    "swiper": "^8.4.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
