@@ -317,7 +317,7 @@ const Home = () => {
             className="all_git_btn"
             style={{ margin: "auto", marginTop: "15px", paddingRight: "15px" }}
           >
-            <Link to="/projects">View All</Link>
+            <a href="https://github.com/ankit2341?tab=repositories" target="_blank">View All</a>
           </button>
         </section>
         <div

@@ -3,6 +3,7 @@
 * {
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
+  /* overflow-y: hidden; */
 }
 
 html {
@@ -974,7 +975,6 @@ textarea,
     padding: 0px;
     box-sizing: border-box;
     /* min-width: 100%; */
-    zoom: 0fr;
   }
   .git_calendar .git_calendar_div {
     margin-left: 120px;
