@@ -323,6 +323,7 @@ const Home = () => {
         <div
           style={{ margin: "auto", marginTop: "50px" }}
           className="git_calendar"
+          data-aos="fade-left"
         >
           <div className="git_calendar_div">
             <GitHubCalendar
@@ -339,6 +340,7 @@ const Home = () => {
         <div
           style={{ margin: "auto", marginTop: "50px", opacity: "0.8" }}
           className="git_contri"
+          data-aos="fade-right"
         >
           <a href="https://github.com/ankit2341">
             {" "}
@@ -349,7 +351,7 @@ const Home = () => {
           </a>
         </div>
 
-        <div className="github_lang">
+        <div className="github_lang" data-aos="fade-left">
           <a href="https://github.com/ankit2341">
             <img
               src="https://github-readme-stats.vercel.app/api/top-langs/?username=ankit2341"
