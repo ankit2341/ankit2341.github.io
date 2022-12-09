@@ -1,17 +1,18 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,600");
 
 * {
-  box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
-  /* overflow-y: hidden; */
+ 
 }
 
 html {
   scroll-behavior: smooth;
+  /* overflow-x: hidden; */
 }
 
 body {
   font-family: "Montserrat", sans-serif;
+  overflow-x: hidden;
 }
 
 .navigation {
@@ -30,6 +31,7 @@ nav ul {
 .main-content {
   width: 100%;
   height: 2880px;
+  /* overflow-x: hidden; */
 }
 nav li {
   /*   list-style: none; */
@@ -140,6 +142,7 @@ h1 {
   color: #3e64ff;
   width: 0;
 }
+
 @keyframes typing {
   from {
     width: 0;
@@ -381,23 +384,24 @@ a {
 .skill_grid {
   width: 70%;
   display: grid;
-  grid-template-columns: repeat(5, 150px);
-  grid-template-rows: repeat(2, 150px);
-  gap: 30px 80px;
+  grid-template-columns: repeat(4, 140px);
+  grid-template-rows: repeat(3, 140px);
+  gap: 20px 80px;
   margin: auto;
-  margin-top: 60px;
+  margin-left: 24%;
+  margin-top: 50px;
 }
 #skills h1 {
   margin-top: 30px;
 }
 .skill_grid div {
-  width: 150px;
-  height: 150px;
+  width: 140px;
+  height: 140px;
 }
 .skill_grid img {
   background: #ffffff;
-  width: 130px;
-  height: 130px;
+  width: 120px;
+  height: 120px;
 }
 .move-up:hover {
   /* background: #3e64ff; */
@@ -968,13 +972,22 @@ textarea,
   justify-content: center;
   margin-top: 50px;
 }
-
+.pagenotfound{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+  height: 100vh;
+}
 @media only screen and (max-width: 912px) {
-  * {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    /* min-width: 100%; */
+  .pagenotfound{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: left;
+    width: 90%;
+    height: 100vh;
+    margin-top: 50%;
   }
   .git_calendar .git_calendar_div {
     margin-left: 120px;
@@ -1278,12 +1291,18 @@ textarea,
 }
 
 @media only screen and (max-width: 480px) {
-  * {
-    width: auto;
+  .pagenotfound{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: left;
+    margin-top: 50%;
   }
   .git_calendar .git_calendar_div {
-    display: none;
+    /* display: none; */
     /* margin-left: 0px; */
+    margin-left: 0px;
+    /* block-size: 10; */
   }
   .git_contri img {
     margin-left: 0%;

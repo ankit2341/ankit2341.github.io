@@ -17,7 +17,7 @@ function NextCarousal() {
       variant="dark"
       interval={1000}
       activeIndex={index}
-      style={{ color: "#000000", borderBottom: "none" }}
+      style={{color: "#000000", borderBottom: "none" }}
       onSelect={handleSelect}
     >
       <Carousel.Item
