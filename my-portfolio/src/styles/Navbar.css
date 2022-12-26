@@ -384,11 +384,11 @@ a {
 .skill_grid {
   width: 70%;
   display: grid;
-  grid-template-columns: repeat(4, 140px);
+  grid-template-columns: repeat(5, 140px);
   grid-template-rows: repeat(3, 140px);
   gap: 20px 80px;
   margin: auto;
-  margin-left: 24%;
+  margin-left: 16%;
   margin-top: 50px;
 }
 #skills h1 {
@@ -990,7 +990,7 @@ textarea,
     margin-top: 50%;
   }
   .git_calendar .git_calendar_div {
-    margin-left: 120px;
+    margin-left: 60px;
   }
   .git_contri img {
     margin-left: 20%;
