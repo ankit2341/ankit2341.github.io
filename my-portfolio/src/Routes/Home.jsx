@@ -340,6 +340,15 @@ const Home = () => {
           className="git_calendar"
           data-aos="zoom-in"
         >
+           <h1
+            style={{
+              fontSize: "40px",
+              fontWeight: "bolder",
+              marginBottom: "25px",
+            }}
+          >
+            My Github Stats
+          </h1>
           <div className="git_calendar_div">
             <GitHubCalendar
               username="ankit2341"
@@ -382,7 +391,7 @@ const Home = () => {
           </a>
         </div>
 
-        <section id="contact" className="contact" data-aos="fade-up">
+        <section id="contact" className="contact" >
           <div class="contact-header">
             <h1 id="co-text">Contact Me</h1>
           </div>

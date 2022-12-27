@@ -961,7 +961,7 @@ textarea,
   display: none;
 }
 .git_calendar .git_calendar_div {
-  margin-left: 500px;
+  margin-left: 450px;
 }
 .git_contri img {
   margin-left: 35%;
@@ -1096,7 +1096,7 @@ textarea,
     width: 80%;
     display: grid;
     grid-template-columns: repeat(4, 100px);
-    grid-template-rows: repeat(3, 100px);
+    grid-template-rows: repeat(4, 100px);
     gap: 10px 80px;
     margin: auto;
     margin-top: 60px;
@@ -1291,6 +1291,9 @@ textarea,
 }
 
 @media only screen and (max-width: 480px) {
+  body{
+    overflow-x: hidden;
+  }
   .pagenotfound{
     display: flex;
     align-items: center;
@@ -1410,7 +1413,7 @@ textarea,
     width: 65%;
     display: grid;
     grid-template-columns: repeat(3, 60px);
-    grid-template-rows: repeat(4, 60px);
+    grid-template-rows: repeat(5, 60px);
     gap: 10px 40px;
     margin: auto;
     margin-top: 60px;

@@ -20,7 +20,7 @@ function MobileCarousal() {
           <Card.Img
             variant="top"
             style={{ width: "80%", height: "300px", margin: "auto" }}
-            src="https://camo.githubusercontent.com/98a803e91fb0e963e04d9022582ba052e12e34bde89fb07b21835da776dafa1a/68747470733a2f2f692e706f7374696d672e63632f564c334e6b584b4c2f696e6469616e2d657870726573732d636c6f6e652d312e706e67"
+            src="https://camo.githubusercontent.com/b408c7752e72bdc397d0f63644cd9f5dfdc8b34257bd2c3e0c11607e30ad5242/68747470733a2f2f692e706f7374696d672e63632f54507a5150314d712f696575706461746564312e6a7067"
           />
           <Card.Body>
             <Card.Title>
@@ -220,7 +220,7 @@ function MobileCarousal() {
         <Card
           style={{
             width: "100%",
-            height: "510px",
+            height: "570px",
             marginRight: "20px",
             paddingTop: "10px",
             borderRadius: "20px",
@@ -236,12 +236,12 @@ function MobileCarousal() {
               margin: "auto",
               boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
             }}
-            src="https://i.postimg.cc/W4tJ8qk0/naukri-com-clone.jpg"
+            src="https://i.postimg.cc/hP5NW9Pf/coolmart1.jpg"
           />
           <Card.Body>
             <Card.Title>
               {" "}
-              <span style={{ fontWeight: "bolder" }}>NAUKRI CLONE</span>
+              <span style={{ fontWeight: "bolder" }}>COOLMART (MODESENS CLONE)</span>
             </Card.Title>
             <Card.Text
               style={{
@@ -251,19 +251,26 @@ function MobileCarousal() {
                 flexDirection: "column",
               }}
             >
-              <p>A website for job search and apply.</p>
+              <p>An e-commerce website for searching and buying products with admin panel.</p>
               <p>
                 <span style={{ fontWeight: "bolder" }}>Features: </span>
-                Login | Signup | Search jobs | Apply jobs
+                Login | Signup | Search | Admin panel | Cart 
               </p>
               <p>
-                <span style={{ fontWeight: "bolder" }}>Tech Stack: </span>React
-                | HTML | Javascript | CSS | API | React Bootstrap | Chakra Ui
+                {" "}
+                <span style={{ fontWeight: "bolder" }}>
+                  Areas of responsibility:
+                </span>{" "}
+                Designed product details page | Cartpage | Login-Signup
+              </p>{" "}
+              <p>
+                <span style={{ fontWeight: "bolder" }}>Tech Stack: </span>
+                React | Redux | Redux-Thunk | Redux-Persist | Firebase | CSS | API | React Bootstrap | Chakra Ui | Aos
               </p>
 
               <p>
-                An <span style={{ fontWeight: "bolder" }}>Individual</span>{" "}
-                project developed within 5 days.
+                A <span style={{ fontWeight: "bolder" }}>Collaborative</span>{" "}
+                project developed within 5 days with 5 members.
               </p>
               <div
                 style={{
@@ -273,7 +280,7 @@ function MobileCarousal() {
                 }}
               >
                 <a
-                  href="https://github.com/ankit2341/ripe-theory-3388"
+                  href="https://github.com/Surendrakumar878/hissing-love-5128"
                   target="_blank"
                 >
                   <button className="all_git_btn">
@@ -292,7 +299,10 @@ function MobileCarousal() {
                   </button>
                 </a>
 
-                <a target="_blank" href="https://ripe-theory-3388.netlify.app/">
+                <a
+                  target="_blank"
+                  href="https://coolmartz.netlify.app/"
+                >
                   <button className="all_link_btn">
                     <span>
                       <svg
