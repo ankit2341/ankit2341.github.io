@@ -101,12 +101,12 @@ const Home = () => {
     Aos.init({ duration: 2000 });
   }, []);
   
-  function driveRedirect() {
-    window.open(
-      "https://drive.google.com/file/d/1O08b_qbSyWhN_ZNnGt_L79u5_USMEnGq/view?usp=sharing",
-      "_blank"
-    );
-  }
+  // function driveRedirect() {
+  //   window.open(
+  //     "https://drive.google.com/file/d/1O08b_qbSyWhN_ZNnGt_L79u5_USMEnGq/view?usp=sharing",
+  //     "_blank"
+  //   );
+  // }
 
   return (
     <>
@@ -121,7 +121,6 @@ const Home = () => {
           About
         </a>
         <a
-         onClick={driveRedirect}
           href="https://drive.google.com/uc?export=download&id=1O08b_qbSyWhN_ZNnGt_L79u5_USMEnGq"
           download
           className={active == "resume" ? "active1" : "none"}
@@ -163,7 +162,6 @@ const Home = () => {
             About
           </a>
           <a
-           onClick={driveRedirect}
             href="https://drive.google.com/uc?export=download&id=1O08b_qbSyWhN_ZNnGt_L79u5_USMEnGq"
             download
             className={active == "resume" ? "active" : "none"}
@@ -238,7 +236,6 @@ const Home = () => {
             <button className="all_btn">
               {" "}
               <a
-               onClick={driveRedirect}
                 href="https://drive.google.com/uc?export=download&id=1O08b_qbSyWhN_ZNnGt_L79u5_USMEnGq"
                 download
               >
@@ -349,17 +346,17 @@ const Home = () => {
           >
             My Github Stats
           </h1>
-          <div className="git_calendar_div">
+          {/* <div className="git_calendar_div"> */}
             <GitHubCalendar
+              style={{margin:"auto"}}
               username="ankit2341"
               blockSize={20}
               fontSize={20}
-              transformData={selectLastHalfYear}
               color="#3e64ff"
             >
               <ReactTooltip delay={20} html />
             </GitHubCalendar>
-          </div>
+          {/* </div> */}
         </div>
         <div
           style={{ margin: "auto", marginTop: "50px", opacity: "0.8" }}
@@ -509,7 +506,6 @@ const Home = () => {
               <a href="#about">About</a>
 
               <a
-               onClick={driveRedirect}
               href="https://drive.google.com/uc?export=download&id=1O08b_qbSyWhN_ZNnGt_L79u5_USMEnGq" download>
                 Resume
               </a>
