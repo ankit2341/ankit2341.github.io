@@ -17,8 +17,10 @@ const config = defineConfig({
     semanticTokens: {
       colors: {
         brand: {
-    primary:{value:"#9142ff"},
-        
+        background: {value:"#0d0d0d"} ,     
+  text: {value:"#f5f5f5"}  ,         
+  primary: {value:"#14b8a6"},         
+  border: {value:"#2c2c2e"},
         },
       },
     },

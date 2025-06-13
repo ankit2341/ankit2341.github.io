@@ -1,5 +1,5 @@
 :root {
-  --size: 20px;
+  --size: 15px;
 }
 
 * {
@@ -9,7 +9,7 @@
 body {
   margin: 0;
   font-family: 'Geist', sans-serif;
-  background: hsl(0 0% 6%);
+  background: #0d0d0d;
   position: relative;
   overflow-x: hidden;
   color: white; /* Optional: for visibility */
@@ -24,13 +24,17 @@ body {
   z-index: -1; /* Stay behind everything */
   background: conic-gradient(
     from 180deg at 50% 70%,
-    hsla(0, 0%, 98%, 1) 0deg,
-    #eec32d 72deg,
-    #ec4b4b 144deg,
-    #709ab9 216deg,
-    #4dffbf 288deg,
-    hsla(0, 0%, 98%, 1) 1turn
+    #7dd3fc 0deg,
+    /* sky blue */ #38bdf8 45deg,
+    /* vivid blue */ #a78bfa 90deg,
+    /* soft purple */ #f472b6 135deg,
+    /* rose pink */ #facc15 180deg,
+    /* golden amber */ #4ade80 225deg,
+    /* fresh green */ #2dd4bf 270deg,
+    /* teal/mint */ #7dd3fc 315deg,
+    /* loop */ #7dd3fc 1turn
   );
+
   mask:
     radial-gradient(circle at 50% 50%, white 2px, transparent 2.5px) 50% 50% / var(--size)
       var(--size),
@@ -52,4 +56,98 @@ body {
   position: relative;
   z-index: 1;
   padding: 2rem;
+}
+
+#signature {
+  stroke-dasharray: 3550; /* Total Length from the above Javascript Code */
+  stroke-dashoffset: 3550; /* Total Length from the above Javascript Code */
+  animation: sign 2.5s ease-in-out forwards infinite;
+}
+
+@keyframes sign {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+
+.jt {
+  position: relative;
+  font-size: 48px;
+  font-family: 'Staatliches', sans-serif;
+  text-transform: uppercase;
+  font-display: swap;
+  text-shadow: 0 0 10px #14b8a6;
+}
+
+.jt__row {
+  display: block;
+}
+.jt__row:nth-child(1) {
+  clip-path: polygon(-10% 75%, 110% 75%, 110% 110%, -10% 110%);
+}
+.jt__row:nth-child(2) {
+  clip-path: polygon(-10% 50%, 110% 50%, 110% 75.3%, -10% 75.3%);
+}
+.jt__row:nth-child(3) {
+  clip-path: polygon(-10% 25%, 110% 25%, 110% 50.3%, -10% 50.3%);
+}
+.jt__row:nth-child(4) {
+  clip-path: polygon(-10% 0%, 110% 0%, 110% 25.3%, -10% 25.3%);
+}
+
+.jt__row.jt__row--sibling {
+  position: absolute;
+  top: 0;
+  left: 0;
+  user-select: none;
+}
+
+.jt__text {
+  display: block;
+  transform-origin: bottom left;
+  animation: moveIn 2s 0s cubic-bezier(0.36, 0, 0.06, 1) alternate infinite;
+}
+.jt__row:nth-child(1) .jt__text {
+  transform: translateY(-0.1em);
+}
+.jt__row:nth-child(2) .jt__text {
+  transform: translateY(-0.3em) scaleY(1.1);
+}
+.jt__row:nth-child(3) .jt__text {
+  transform: translateY(-0.5em) scaleY(1.2);
+}
+.jt__row:nth-child(4) .jt__text {
+  transform: translateY(-0.7em) scaleY(1.3);
+}
+.jt__row:nth-child(5) .jt__text {
+  transform: translateY(-0.9em) scaleY(1.4);
+}
+.jt__row:nth-child(6) .jt__text {
+  transform: translateY(-1.1em) scaleY(1.5);
+}
+
+@keyframes moveIn {
+  50%,
+  100% {
+    transform: translateY(0em);
+  }
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+.debug .jt__row:nth-child(even) {
+  color: black;
+  background: white;
+}
+.debug .jt__row:nth-child(odd) {
+  color: white;
+  background: black;
 }

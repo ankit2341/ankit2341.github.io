@@ -1,5 +1,6 @@
 import { Provider } from '@/components/ui/provider';
 import '@/app/globals.css';
+import '@/lib/fontawesome'; 
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props;
