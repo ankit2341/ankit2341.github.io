@@ -2,6 +2,7 @@
 import ScrollBadge from '@/features/components/scroll-badge';
 import ContactForm from '@/shared/components/contact-form';
 import Navbar from '@/shared/components/navbar';
+import SkillsSection from '@/shared/components/skills';
 import { SignatureLogo } from '@/shared/icons';
 import { Avatar, Icon, Text, VStack } from '@chakra-ui/react';
 
@@ -34,12 +35,13 @@ export default function Home() {
                 <span className="jt__text">Ankit</span>
               </span>
             </h1>
-            <Text fontSize="md" opacity={0.7} color={'brand.text'}>
+            <Text fontSize="md" w={'100%'} textAlign={'center'} opacity={0.7} color={'brand.text'}>
               Full Stack Developer & UI/UX Enthusiast
             </Text>
             <Icon width={100} height={100} bottom="0%" as={SignatureLogo} />
             <ScrollBadge />
           </VStack>
+          <SkillsSection />
           <ContactForm />
         </VStack>
       </div>
