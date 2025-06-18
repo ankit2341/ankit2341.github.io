@@ -36,7 +36,7 @@ const Navbar = () => {
       <Drawer.Root>
         <Drawer.Trigger asChild>
           <HStack bg={"brand.background"} w={'100%'} pos={'fixed'} zIndex={1} p={4} gap={'10px'} top={0} left={0}>
-            <Button variant="sold" size="sm" bg={'brand.background'}>
+            <Button variant="solid" size="sm" bg={'brand.background'}>
               <FontAwesomeIcon color="white" icon={faGripLines} />
             </Button>{' '}
             <Box flex={0.4} fontSize={'lg'} fontWeight={'bold'}>
