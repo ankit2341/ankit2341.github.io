@@ -1,12 +1,17 @@
 'use client';
 import ScrollBadge from '@/features/components/scroll-badge';
-import ContactForm from '@/shared/components/contact-form';
+import ContactSection from '@/shared/components/contact';
+
 import Navbar from '@/shared/components/navbar';
+import ProjectsSection from '@/shared/components/project';
 import SkillsSection from '@/shared/components/skills';
 import { SignatureLogo } from '@/shared/icons';
-import { Avatar, Icon, Text, VStack } from '@chakra-ui/react';
+import { Avatar, Box, Icon, Image, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
+import GitHubCalendar from 'react-github-calendar';
 
 export default function Home() {
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
   return (
     <>
       <div className="site-background"></div>
@@ -41,8 +46,40 @@ export default function Home() {
             <Icon width={100} height={100} bottom="0%" as={SignatureLogo} />
             <ScrollBadge />
           </VStack>
+          <ProjectsSection />
           <SkillsSection />
-          <ContactForm />
+          {!isMobile && (
+            <VStack py={16} px={6} textAlign="center" align={'center'} justify={'center'}>
+              <h1 className="jt --debug">
+                <span className="jt__row">
+                  <span className="jt__text">Github Stats</span>
+                </span>
+                <span className="jt__row jt__row--sibling" aria-hidden="true">
+                  <span className="jt__text">Github Stats</span>
+                </span>
+                <span className="jt__row jt__row--sibling" aria-hidden="true">
+                  <span className="jt__text">Github Stats</span>
+                </span>
+                <span className="jt__row jt__row--sibling" aria-hidden="true">
+                  <span className="jt__text">Github Stats</span>
+                </span>
+              </h1>
+
+              <Box w="100%" overflowX="auto" p={4} bg={'brand.background'} borderRadius="xl">
+                <GitHubCalendar
+                  username="ankit2341"
+                  colorScheme="dark"
+                  style={{ maxWidth: '100%' }}
+                />
+              </Box>
+              <Image
+                mt={6}
+                src="https://github-readme-stats.vercel.app/api?username=ankit2341&show_icons=true&theme=tokyonight&hide_border=true&border_radius=10&custom_title=Ankit%20Patil%27s%20GitHub%20Stats"
+                alt="GitHub Stats"
+              />
+            </VStack>
+          )}
+          <ContactSection />
         </VStack>
       </div>
     </>
