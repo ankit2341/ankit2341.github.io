@@ -84,13 +84,19 @@ const ProjectsSection = () => {
             transition="transform 0.2s"
             _hover={{ transform: 'scale(1.02)', boxShadow: '2xl' }}
           >
-            <Image src={project.image} alt={project.title} objectFit="cover" w="100%" h="300px" />
+            <Image
+              src={project.image}
+              alt={project.title}
+              objectFit="cover"
+              w="100%"
+              h={isMobile ? '100px' : '300px'}
+            />
             <Flex p={6} align={'flex-start'} justify={'space-between'} flexDir={'column'}>
               <Heading size="md" mb={2}>
                 {project.title}
               </Heading>
               <Text mb={4}>{project.description}</Text>
-              <SimpleGrid columns={[10]} gap={'4px'}>
+              <SimpleGrid columns={{ base: 4, lg: 10 }} gap={'4px'}>
                 {project?.techStack?.map((el) => {
                   return (
                     <Image
