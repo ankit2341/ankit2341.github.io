@@ -67,13 +67,25 @@ const ContactSection = () => {
 
           <HStack gap={3} color="brand.primary">
             <FontAwesomeIcon icon={faGithub} />
-            <Link href="https://github.com/ankit2341" color="brand.primary">
+            <Link
+              href="https://github.com/ankit2341"
+              as={'a'}
+              target="_blank"
+              rel="noopener noreferrer"
+              color="brand.primary"
+            >
               GitHub
             </Link>
           </HStack>
           <HStack gap={3} color="brand.primary">
             <FontAwesomeIcon icon={faLinkedin} />
-            <Link href="https://www.linkedin.com/in/ankit-patil-948036196/" color="brand.primary">
+            <Link
+              as={'a'}
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.linkedin.com/in/ankit-patil-948036196/"
+              color="brand.primary"
+            >
               LinkedIn
             </Link>
           </HStack>

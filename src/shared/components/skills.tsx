@@ -22,9 +22,22 @@ const skills = [
     title: 'React',
     src: 'https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/react/react-original-wordmark.svg',
   },
+
   {
     title: 'Next.js',
     src: 'https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/nextjs/nextjs-original.svg',
+  },
+  {
+    title: 'React Native',
+    src: 'https://img.icons8.com/color/48/react-native.png',
+  },
+  {
+    title: 'Expo',
+    src: 'https://img.icons8.com/?size=100&id=7ImWFDcPfSlz&format=png&color=ffffff',
+  },
+  {
+    title: 'Chakra UI',
+    src: 'https://img.icons8.com/color/48/chakra-ui.png',
   },
   {
     title: 'Material UI',
@@ -68,7 +81,7 @@ const MotionBox = motion(Box);
 
 const SkillsSection = () => {
   return (
-    <Box id="skills" py={16} px={6} textAlign="center">
+    <Box id="skills" py={24} px={6} textAlign="center">
       <Flex justify="center" w="100%" pb={10}>
         <h1 className="jt --debug">
           <span className="jt__row">
@@ -85,7 +98,7 @@ const SkillsSection = () => {
           </span>
         </h1>
       </Flex>
-      <SimpleGrid columns={[2, 3, 5]} gap="40px">
+      <SimpleGrid columns={[2, 3, 6]} gap="40px">
         {skills.map((skill, index) => (
           <MotionBox
             key={index}
