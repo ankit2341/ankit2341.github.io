@@ -6,7 +6,16 @@ import Navbar from '@/shared/components/navbar';
 import ProjectsSection from '@/shared/components/project';
 import SkillsSection from '@/shared/components/skills';
 import { SignatureLogo } from '@/shared/icons';
-import { Avatar, Box, Icon, Image, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
+import {
+  Avatar,
+  Box,
+  Center,
+  Icon,
+  Image,
+  Text,
+  useBreakpointValue,
+  VStack,
+} from '@chakra-ui/react';
 import GitHubCalendar from 'react-github-calendar';
 
 export default function Home() {
@@ -19,9 +28,9 @@ export default function Home() {
         <VStack color="brand.primary">
           <Navbar />
           <VStack w={'100%'} h={'80vh'} spaceY={'-1.5'} align={'center'} justify={'center'}>
-            <Avatar.Root shape="full" size="2xl" mb={4}>
+            <Avatar.Root shape="full" width={'100px'} height={'100px'} mb={4}>
               <Avatar.Fallback name="Random User" />
-              <Avatar.Image src="https://i.pravatar.cc/300?u=iu" />
+              <Avatar.Image src="https://media.licdn.com/dms/image/v2/D4D03AQHGdPXwK_l8ug/profile-displayphoto-shrink_400_400/B4DZd0ZbPpGgAg-/0/1750004512594?e=1755734400&v=beta&t=Zp3IDcez0FOBQicU2bDiqIC1kt3FVuRqkpa9d61A7cE" />
             </Avatar.Root>
             <Text fontSize={'2xl'} color={'brand.text'}>
               Hi, I am
@@ -41,7 +50,7 @@ export default function Home() {
               </span>
             </h1>
             <Text fontSize="md" w={'100%'} textAlign={'center'} opacity={0.7} color={'brand.text'}>
-              Full Stack Developer & UI/UX Enthusiast
+              Full Stack Developer & Design-Driven Engineer
             </Text>
             <Icon width={100} height={100} bottom="0%" as={SignatureLogo} />
             <ScrollBadge />
@@ -82,6 +91,22 @@ export default function Home() {
           <ContactSection />
         </VStack>
       </div>
+      <Box
+        w={'100%'}
+        bg="brand.background"
+        pos={'absolute'}
+        py={3}
+        left={0}
+        right={0}
+        bottom={0}
+        mt={12}
+      >
+        <Center>
+          <Text fontSize="sm" color="brand.primary">
+            Made with ❤️ by Ankit
+          </Text>
+        </Center>
+      </Box>
     </>
   );
 }

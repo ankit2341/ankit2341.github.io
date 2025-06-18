@@ -38,7 +38,7 @@ const ContactSection = () => {
 
   return (
     <Box id="contact" w={isMobile ? '100%' : '70%'} py={20} px={isMobile ? 0 : 6}>
-      <VStack gap={2} textAlign="center" mb={12}>
+      <VStack gap={'4px'} textAlign="center" mb={12}>
         <h1 className="jt --debug">
           <span className="jt__row">
             <span className="jt__text">Contact Me</span>
@@ -53,7 +53,7 @@ const ContactSection = () => {
             <span className="jt__text">Contact Me</span>
           </span>
         </h1>
-        <Text fontSize="lg" color="brand.primary">
+        <Text fontSize="lg" fontWeight={'semibold'} color={'gray.300'}>
           I&apos;d love to connect with you!
         </Text>
       </VStack>
@@ -61,29 +61,29 @@ const ContactSection = () => {
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={10} maxW="6xl" mx="auto">
         {/* Left: Contact Info */}
         <VStack align={isMobile ? 'center' : 'flex-start'} gap={6} color="brand.primary">
-          <Text fontSize="xl" fontWeight="bold">
+          <Text fontSize="xl" fontWeight="bold" color={'gray.300'}>
             Let&apos;s get in touch
           </Text>
 
           <HStack gap={3} color="brand.primary">
             <FontAwesomeIcon icon={faGithub} />
-            <Link href="https://github.com/yourusername" color="brand.primary">
+            <Link href="https://github.com/ankit2341" color="brand.primary">
               GitHub
             </Link>
           </HStack>
           <HStack gap={3} color="brand.primary">
             <FontAwesomeIcon icon={faLinkedin} />
-            <Link href="https://linkedin.com/in/yourusername" color="brand.primary">
+            <Link href="https://www.linkedin.com/in/ankit-patil-948036196/" color="brand.primary">
               LinkedIn
             </Link>
           </HStack>
           <HStack gap={3}>
             <FontAwesomeIcon icon={faPhone} />
-            <Text>+91 12345 67890</Text>
+            <Text>+91 7972592414</Text>
           </HStack>
           <HStack gap={3}>
             <FontAwesomeIcon icon={faEnvelope} />
-            <Text>youremail@example.com</Text>
+            <Text>ankitpatil2341@gmail.com</Text>
           </HStack>
         </VStack>
 
