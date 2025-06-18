@@ -23,6 +23,18 @@ const Navbar = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   const [hydrated, setHydrated] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const bg = scrolled ? 'brand.background' : 'transparent';
+  const transition = 'background-color 0.3s ease';
 
   // Ensure rendering only happens after hydration
   useEffect(() => {
@@ -35,7 +47,16 @@ const Navbar = () => {
     return (
       <Drawer.Root>
         <Drawer.Trigger asChild>
-          <HStack bg={"brand.background"} w={'100%'} pos={'fixed'} zIndex={1} p={4} gap={'10px'} top={0} left={0}>
+          <HStack
+            bg={'brand.background'}
+            w={'100%'}
+            pos={'fixed'}
+            zIndex={1}
+            p={4}
+            gap={'10px'}
+            top={0}
+            left={0}
+          >
             <Button variant="solid" size="sm" bg={'brand.background'}>
               <FontAwesomeIcon color="white" icon={faGripLines} />
             </Button>{' '}
@@ -60,6 +81,7 @@ const Navbar = () => {
                     borderRadius={'lg'}
                     boxShadow={'md'}
                   >
+                    <FontAwesomeIcon icon={faCloudArrowDown} />
                     Resume
                   </Button>
                   <Button
@@ -75,6 +97,8 @@ const Navbar = () => {
                     w={'100%'}
                     boxShadow={'md'}
                   >
+                    {' '}
+                    <FontAwesomeIcon icon={faLayerGroup} />
                     Projects
                   </Button>
                   <Button
@@ -90,6 +114,7 @@ const Navbar = () => {
                     w={'100%'}
                     boxShadow={'md'}
                   >
+                    <FontAwesomeIcon icon={faBrain} />
                     Skills
                   </Button>
                   <Button
@@ -105,6 +130,7 @@ const Navbar = () => {
                     w={'100%'}
                     boxShadow={'md'}
                   >
+                    <FontAwesomeIcon icon={faNetworkWired} />
                     Contact
                   </Button>
                 </VStack>
@@ -121,7 +147,16 @@ const Navbar = () => {
   }
 
   return (
-    <HStack bg={'brand.background'} w={'100%'} pos={'fixed'} zIndex={1} p={4} top={0} left={0}>
+    <HStack
+      bg={bg}
+      transition={transition}
+      w={'100%'}
+      pos={'fixed'}
+      zIndex={1}
+      p={4}
+      top={0}
+      left={0}
+    >
       <Box flex={0.4} fontSize={'xl'} fontWeight={'bold'}>
         Ankit
       </Box>
@@ -145,6 +180,7 @@ const Navbar = () => {
               bg: 'brand.primary',
             }}
             px={10}
+            bg={'brand.background'}
             borderRadius={'full'}
             colorScheme={'brand'}
             variant={'outline'}
@@ -162,6 +198,7 @@ const Navbar = () => {
               color: 'brand.text',
               bg: 'brand.primary',
             }}
+            bg={'brand.background'}
             px={10}
             variant={'outline'}
             borderRadius={'full'}
@@ -180,6 +217,7 @@ const Navbar = () => {
               color: 'brand.text',
               bg: 'brand.primary',
             }}
+            bg={'brand.background'}
             px={10}
             variant={'outline'}
             borderRadius={'full'}
