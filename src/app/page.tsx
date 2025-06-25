@@ -19,7 +19,7 @@ import {
 import GitHubCalendar from 'react-github-calendar';
 
 export default function Home() {
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = useBreakpointValue({ base: true, md: true, lg: false });
 
   return (
     <>

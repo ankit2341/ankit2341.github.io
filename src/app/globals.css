@@ -13,7 +13,7 @@ body {
   font-family: 'Geist', sans-serif;
   background: #0d0d0d;
   position: relative;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   color: white; /* Optional: for visibility */
   font-family: 'Space Grotesk', sans-serif;
 }

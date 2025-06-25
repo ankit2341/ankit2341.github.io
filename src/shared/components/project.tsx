@@ -89,7 +89,7 @@ const ProjectsSection = () => {
               alt={project.title}
               objectFit="cover"
               w="100%"
-              h={isMobile ? '100px' : '300px'}
+              h={isMobile ? '200px' : '300px'}
             />
             <Flex p={6} align={'flex-start'} justify={'space-between'} flexDir={'column'}>
               <Heading size="md" mb={2}>
