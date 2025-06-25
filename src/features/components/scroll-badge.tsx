@@ -8,7 +8,7 @@ const MotionBox = motion.div;
 const ScrollBadge = () => {
   return (
     <chakra.a
-      href="#explore"
+      href="#experience"
       position="relative"
       display="inline-block"
       w="100px"

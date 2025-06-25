@@ -120,6 +120,25 @@ const Navbar = () => {
                       Projects
                     </Button>
                   </NextLink>
+                  <NextLink href="#experience" passHref>
+                    <Button
+                      _hover={{
+                        color: 'brand.text',
+                        bg: 'brand.primary',
+                      }}
+                      px={10}
+                      borderRadius={'lg'}
+                      colorScheme={'brand'}
+                      variant={'outline'}
+                      color={'brand.text'}
+                      w={'100%'}
+                      border={'none'}
+                      boxShadow={'md'}
+                    >
+                      <FontAwesomeIcon icon={faLayerGroup} />
+                      Experience
+                    </Button>
+                  </NextLink>
                   <NextLink href="#skills" passHref>
                     <Button
                       _hover={{
@@ -197,6 +216,25 @@ const Navbar = () => {
           <FontAwesomeIcon icon={faCloudArrowDown} style={{ marginRight: 8 }} />
           Resume
         </Button>
+        <NextLink href="#experience" passHref>
+          <Button
+            _hover={{
+              color: 'brand.text',
+              bg: 'brand.primary',
+            }}
+            px={10}
+            bg={'brand.background'}
+            borderRadius={'full'}
+            colorScheme={'brand'}
+            variant={'outline'}
+            color={'brand.text'}
+            borderColor={'brand.primary'}
+            boxShadow={'md'}
+          >
+            <FontAwesomeIcon icon={faLayerGroup} />
+            Experience
+          </Button>
+        </NextLink>
         <NextLink href="#projects" passHref>
           <Button
             _hover={{

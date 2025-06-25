@@ -1,6 +1,7 @@
 'use client';
 import ScrollBadge from '@/features/components/scroll-badge';
 import ContactSection from '@/shared/components/contact';
+import ExperienceTimeline from '@/shared/components/experience';
 
 import Navbar from '@/shared/components/navbar';
 import ProjectsSection from '@/shared/components/project';
@@ -17,6 +18,51 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import GitHubCalendar from 'react-github-calendar';
+import { useEffect, useRef } from 'react';
+
+function CursorTrail() {
+  const dotRef = useRef<HTMLDivElement>(null);
+  const mousePos = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    let animationFrameId: number;
+
+    const moveHandler = (e: MouseEvent) => {
+      mousePos.current = { x: e.clientX, y: e.clientY };
+    };
+
+    const update = () => {
+      if (dotRef.current) {
+        dotRef.current.style.left = `${mousePos.current.x}px`;
+        dotRef.current.style.top = `${mousePos.current.y}px`;
+      }
+      animationFrameId = requestAnimationFrame(update);
+    };
+
+    window.addEventListener('mousemove', moveHandler);
+    animationFrameId = requestAnimationFrame(update);
+
+    return () => {
+      window.removeEventListener('mousemove', moveHandler);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  return (
+    <Box
+      ref={dotRef}
+      pointerEvents="none"
+      pos="fixed"
+      w="15px"
+      h="15px"
+      bg="brand.primary"
+      borderRadius="full"
+      transform="translate(-50%, -50%)"
+      opacity={1}
+      zIndex="9999"
+    />
+  );
+}
 
 export default function Home() {
   const isMobile = useBreakpointValue({ base: true, md: true, lg: false });
@@ -25,6 +71,7 @@ export default function Home() {
     <>
       <div className="site-background"></div>
       <div className="site-content">
+        <CursorTrail />
         <VStack color="brand.primary">
           <Navbar />
           <VStack w={'100%'} h={'80vh'} spaceY={'-1.5'} align={'center'} justify={'center'}>
@@ -55,6 +102,7 @@ export default function Home() {
             <Icon width={100} height={100} bottom="0%" as={SignatureLogo} />
             <ScrollBadge />
           </VStack>
+          <ExperienceTimeline />
           <ProjectsSection />
           <SkillsSection />
           {!isMobile && (
