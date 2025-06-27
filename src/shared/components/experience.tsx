@@ -23,10 +23,10 @@ const experiences = [
     duration: 'Jul 2023 – today',
     location: 'RKS Cloud, Navi Mumbai, India',
     points: [
-      'Led React Native development for Android/iOS.',
-      'Built cross-platform UI components using Gluestack UI.',
-      'Integrated Expo modules for camera, location, and notifications.',
-      'Collaborated with backend on performance-optimized solutions.',
+      'Led React Native development for Android/iOS apps, optimizing state management to improve UI load times by 25% while implementing key features',
+      'Built and maintained cross-platform UI components using Gluestack UI, ensuring visual consistency and accessibility across iOS and Android.',
+      'Integrated key Expo modules such as expo-camera, expo-location, and expo-notifications to enable rich, device native functionality with minimal overhead.',
+      'Collaborated with the backend team to design scalable, performance-optimized solutions for key platform features.',
     ],
   },
 ];
