@@ -10,12 +10,12 @@ const experiences = [
     duration: 'Jul 2023 – today',
     location: 'RKS Cloud, Navi Mumbai, India',
     points: [
-      'Led the frontend team in designing scalable design systems and reusable components.',
-      'Developed 15+ features using Next.js, TypeScript, Chakra UI.',
-      'Mentored junior developers via code reviews and pairing.',
-      'Integrated Docusaurus for internal documentation.',
-      'Collaborated with backend team to build scalable, optimized solutions.',
-      'Implemented SEO best practices to improve visibility.',
+      'Led the frontend team in architecting scalable design systems and reusable component libraries, improving development efficiency by 30%.',
+      'Developed 15+ features using Next.js, TypeScript, and Chakra UI to streamline workflows and enhance UI consistency, reducing page load times by 40%.',
+      'Integrated Single Sign-On (SSO) authentication using Okta on the frontend, enabling secure, seamless user access and aligning with enterprise identity standards.',
+      'Delivered a customer-facing documentation site for Cloudgov using Docusaurus, with full ownership over design, development, and deployment to ensure responsive, scalable, and branded technical content.',
+      'Built the frontend interface for a report alerting system that enables users to configure threshold-based alerts, triggering backend-driven email and message notifications for timely reporting insights.',
+      'Implemented SEO best practices to improve site visibility, indexing, and organic search performance.',
     ],
   },
   {
@@ -35,7 +35,7 @@ const MotionBox = motion(Box);
 
 export default function ExperienceTimeline() {
   return (
-    <Box py={20} w={'100%'} id="experience" px={{ base: 4, md: 12 }} position="relative">
+    <Box py={20} w={'100%'} id="experience" px={{ base: 0, md: 12 }} position="relative">
       <Flex w={'100%'} justify="center" mb={12}>
         <h1 className="jt --debug">
           <span className="jt__row">
