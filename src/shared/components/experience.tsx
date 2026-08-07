@@ -4,34 +4,70 @@ import { Box, Text, VStack, HStack, Flex, Badge } from '@chakra-ui/react';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
-const experiences = [
+type Group = {
+  heading: string;
+  points: string[];
+};
+
+type Experience = {
+  role: string;
+  company: string;
+  duration: string;
+  location: string;
+  groups: Group[];
+  tags: string[];
+};
+
+const experiences: Experience[] = [
   {
-    company: 'Cloudgov',
-    role: 'Lead Frontend Engineer',
-    duration: 'Jul 2023 – Present',
-    location: 'RKS Cloud · Navi Mumbai, India',
-    points: [
-      'Led the frontend team in architecting scalable design systems and reusable component libraries, improving development efficiency by 30%.',
-      'Developed 15+ features using Next.js, TypeScript, and Chakra UI to streamline workflows and enhance UI consistency, reducing page load times by 40%.',
-      'Integrated Single Sign-On (SSO) authentication using Okta on the frontend, enabling secure, seamless user access.',
-      'Delivered a customer-facing documentation site with Docusaurus — full ownership of design, dev, and deployment.',
-      'Built the frontend interface for a report alerting system enabling users to configure threshold-based alerts.',
-      'Implemented SEO best practices to improve site visibility, indexing, and organic search performance.',
+    role: 'Full Stack Engineer, Frontend',
+    company: 'RKS Cloud · Cloudgov',
+    duration: 'Jul 2023 · Present',
+    location: 'Navi Mumbai, India',
+    groups: [
+      {
+        heading: 'Cloudgov Web · Next.js 15, TypeScript, Chakra UI, Apollo, GraphQL',
+        points: [
+          'Built and maintain the Cloudgov UI foundation, a design system in React and TypeScript on Chakra UI v3, reused across the CXO Dashboard, Insights, Anomaly detection and multi cloud Onboarding flows.',
+          'Shipped executive facing surfaces including the CXO Dashboard with KPIs, drill downs and forecast views using Chart.js, and the AI Governance suite for LLM cost visibility.',
+          'Owned the multi cloud Onboarding flow across AWS, GCP, Azure, Datadog and Databricks. Connector wizards, credential handling UI and validation states.',
+          'Built a configurable alerting UI with a rule builder and preview, used by ops and support teams to catch anomalies before they hit customer bills.',
+          'Integrated Okta SSO for enterprise tenants including the SAML callback flow and org scoped session state.',
+          'Integrated Stripe for subscription billing and the payments UI.',
+          'Wrote unit and integration tests with Jest and React Testing Library. Kept the shared UI covered as the surface grew.',
+          'Frontend performance work: route level code splitting, dynamic imports for heavy widgets like Monaco and chart heavy dashboards, image optimization, asset lazy loading. Noticeably faster time to interactive on the main dashboards.',
+          'Improved organic discoverability through Next.js metadata, sitemaps and structured data on public product pages.',
+        ],
+      },
+      {
+        heading: 'Docs and Marketing Platforms',
+        points: [
+          'Owned the Cloudgov Docusaurus documentation site end to end. IA, design, build, CI/CD deploy. Improved self serve onboarding for customers.',
+          'Built and maintained supporting WordPress marketing surfaces alongside the product docs.',
+        ],
+      },
+      {
+        heading: 'TRZR Mobile · React Native, Expo, Gluestack UI',
+        points: [
+          'Shipped cross platform features across Android and iOS.',
+          'Built a shared UI kit on Gluestack UI for parity between platforms.',
+          'Integrated native modules including camera, geolocation and Expo push notifications for core in app features.',
+          'Reduced re render churn on feed screens by memoizing list items and moving derived state out of render.',
+        ],
+      },
     ],
-    tags: ['Next.js', 'TypeScript', 'Chakra UI', 'Okta SSO', 'Docusaurus'],
-  },
-  {
-    company: 'TRZR',
-    role: 'React Native Engineer',
-    duration: 'Jul 2023 – Present',
-    location: 'RKS Cloud · Navi Mumbai, India',
-    points: [
-      'Led React Native development for Android/iOS apps, optimizing state management to improve UI load times by 25%.',
-      'Built and maintained cross-platform UI components with Gluestack UI, ensuring visual consistency and accessibility.',
-      'Integrated key Expo modules (expo-camera, expo-location, expo-notifications) for rich native functionality.',
-      'Collaborated with backend team to design scalable, performance-optimized solutions for key platform features.',
+    tags: [
+      'Next.js 15',
+      'TypeScript',
+      'Chakra UI v3',
+      'Apollo GraphQL',
+      'Chart.js',
+      'Okta SSO',
+      'Stripe',
+      'React Native',
+      'Expo',
+      'Docusaurus',
     ],
-    tags: ['React Native', 'Expo', 'Gluestack UI', 'iOS', 'Android'],
   },
 ];
 
@@ -49,48 +85,28 @@ export default function ExperienceTimeline() {
       px={{ base: 5, md: 8 }}
     >
       <VStack align="start" gap={3} mb={16}>
-        <Text className="eyebrow">02 — Where I&apos;ve been</Text>
+        <Text className="eyebrow">02 / Experience</Text>
         <Text className="section-heading">
-          Selected <em>experience</em>
+          Where I&apos;ve <em>shipped</em>.
         </Text>
-        <Text color="brand.muted" fontSize={{ base: 'md', md: 'lg' }} maxW="600px">
-          Shipping production software with small, thoughtful teams — with an eye for craft.
+        <Text color="brand.muted" fontSize={{ base: 'md', md: 'lg' }} maxW="600px" mt={2}>
+          Production work at Cloudgov, from the design system up through executive dashboards
+          and the mobile app.
         </Text>
       </VStack>
 
-      <Box position="relative" pl={{ base: 6, md: 10 }}>
-        <Box
-          position="absolute"
-          left={{ base: '10px', md: '14px' }}
-          top={0}
-          bottom={0}
-          width="1px"
-          bg="brand.border"
-        />
-        <VStack gap={12} align="stretch">
-          {experiences.map((exp, i) => (
-            <ExperienceCard key={i} exp={exp} />
-          ))}
-        </VStack>
-      </Box>
+      <VStack gap={16} align="stretch">
+        {experiences.map((exp, i) => (
+          <ExperienceCard key={i} exp={exp} />
+        ))}
+      </VStack>
     </Box>
   );
 }
 
-function ExperienceCard({
-  exp,
-}: {
-  exp: {
-    company: string;
-    role: string;
-    duration: string;
-    location: string;
-    points: string[];
-    tags: string[];
-  };
-}) {
+function ExperienceCard({ exp }: { exp: Experience }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true, amount: 0.15 });
   const controls = useAnimation();
 
   useEffect(() => {
@@ -103,93 +119,123 @@ function ExperienceCard({
       initial="hidden"
       animate={controls}
       variants={{
-        hidden: { opacity: 0, y: 30 },
+        hidden: { opacity: 0, y: 24 },
         visible: { opacity: 1, y: 0 },
       }}
       transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
-      position="relative"
+      className="editorial-card"
+      p={{ base: 6, md: 10 }}
     >
-      <Box
-        position="absolute"
-        left={{ base: '-19px', md: '-27px' }}
-        top="24px"
-        boxSize="14px"
-        borderRadius="full"
-        bg="brand.primary"
-        border="3px solid"
-        borderColor="brand.background"
-        boxShadow="0 0 0 1px var(--chakra-colors-brand-border)"
-      />
-
-      <Box className="sketch-card" p={{ base: 5, md: 8 }}>
-        <Flex
-          justify="space-between"
-          flexWrap="wrap"
-          gap={2}
-          mb={1}
-          align={{ base: 'flex-start', md: 'center' }}
-          flexDirection={{ base: 'column', md: 'row' }}
-        >
-          <Box>
-            <Text
-              fontFamily="'Fraunces', serif"
-              fontSize={{ base: 'xl', md: '2xl' }}
-              fontWeight={600}
-              color="brand.text"
-              letterSpacing="-0.01em"
-            >
-              {exp.role}
-            </Text>
-            <Text color="brand.primary" fontSize="md" fontWeight={500} mt={1}>
-              @ {exp.company}
-            </Text>
-          </Box>
-          <VStack align={{ base: 'flex-start', md: 'flex-end' }} gap={0}>
-            <Text color="brand.muted" fontSize="sm" fontWeight={500}>
-              {exp.duration}
-            </Text>
-            <Text color="brand.muted" fontSize="xs">
-              {exp.location}
-            </Text>
-          </VStack>
-        </Flex>
-
-        <VStack as="ul" pl={4} gap={2} align="start" mt={5}>
-          {exp.points.map((point, i) => (
-            <Text
-              as="li"
-              key={i}
-              fontSize={{ base: 'sm', md: 'md' }}
-              color="brand.muted"
-              lineHeight={1.7}
-              listStyleType="'— '"
-              css={{ '&::marker': { color: 'var(--chakra-colors-brand-primary)' } }}
-            >
-              {point}
-            </Text>
-          ))}
+      <Flex
+        justify="space-between"
+        flexWrap="wrap"
+        gap={3}
+        mb={8}
+        align={{ base: 'flex-start', md: 'center' }}
+        flexDirection={{ base: 'column', md: 'row' }}
+      >
+        <Box>
+          <Text
+            fontFamily="'Fraunces', serif"
+            fontSize={{ base: '2xl', md: '3xl' }}
+            fontWeight={400}
+            color="brand.text"
+            letterSpacing="-0.01em"
+            lineHeight={1.15}
+          >
+            {exp.role}
+          </Text>
+          <Text
+            color="brand.accent"
+            fontSize="md"
+            fontWeight={400}
+            mt={2}
+            fontFamily="'Fraunces', serif"
+            fontStyle="italic"
+          >
+            {exp.company}
+          </Text>
+        </Box>
+        <VStack align={{ base: 'flex-start', md: 'flex-end' }} gap={1}>
+          <Text
+            color="brand.text"
+            fontSize="sm"
+            fontWeight={500}
+            letterSpacing="0.02em"
+          >
+            {exp.duration}
+          </Text>
+          <Text color="brand.muted" fontSize="xs" letterSpacing="0.02em">
+            {exp.location}
+          </Text>
         </VStack>
+      </Flex>
 
-        <HStack gap={2} mt={6} flexWrap="wrap">
-          {exp.tags.map((tag) => (
-            <Badge
-              key={tag}
-              bg="brand.surfaceAlt"
-              color="brand.primary"
-              border="1px solid"
-              borderColor="brand.border"
-              px={3}
-              py={1}
-              borderRadius="full"
+      <Box h="1px" bg="brand.border" mb={8} />
+
+      <VStack gap={10} align="stretch">
+        {exp.groups.map((group) => (
+          <Box key={group.heading}>
+            <Text
               fontSize="xs"
+              color="brand.muted"
+              textTransform="uppercase"
+              letterSpacing="0.24em"
               fontWeight={500}
-              textTransform="none"
+              mb={4}
             >
-              {tag}
-            </Badge>
-          ))}
-        </HStack>
-      </Box>
+              {group.heading}
+            </Text>
+            <VStack align="stretch" gap={3}>
+              {group.points.map((point, i) => (
+                <HStack key={i} align="flex-start" gap={4}>
+                  <Text
+                    color="brand.accent"
+                    fontSize="sm"
+                    mt={1}
+                    fontFamily="'Fraunces', serif"
+                    minW="20px"
+                  >
+                    0{i + 1}
+                  </Text>
+                  <Text
+                    fontSize={{ base: 'sm', md: 'md' }}
+                    color="brand.text"
+                    lineHeight={1.75}
+                    fontWeight={300}
+                    flex={1}
+                  >
+                    {point}
+                  </Text>
+                </HStack>
+              ))}
+            </VStack>
+          </Box>
+        ))}
+      </VStack>
+
+      <Box h="1px" bg="brand.border" my={8} />
+
+      <HStack gap={2} flexWrap="wrap">
+        {exp.tags.map((tag) => (
+          <Badge
+            key={tag}
+            bg="transparent"
+            color="brand.muted"
+            border="1px solid"
+            borderColor="brand.border"
+            px={3}
+            py={1}
+            borderRadius="full"
+            fontSize="xs"
+            fontWeight={400}
+            textTransform="none"
+            letterSpacing="0.02em"
+          >
+            {tag}
+          </Badge>
+        ))}
+      </HStack>
     </MotionBox>
   );
 }

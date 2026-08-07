@@ -18,6 +18,7 @@ import {
 } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import GitHubCalendar from 'react-github-calendar';
 import { useEffect, useRef } from 'react';
 
@@ -86,24 +87,24 @@ export default function Home() {
             px={{ base: 5, md: 8 }}
           >
             <VStack align="start" gap={3} mb={10}>
-              <Text className="eyebrow">06 — Activity</Text>
+              <Text className="eyebrow">06 / Activity</Text>
               <Text className="section-heading">
-                Recent <em>commits</em>
+                Recent <em>commits</em>.
               </Text>
             </VStack>
-            <Box className="sketch-card" p={{ base: 4, md: 6 }} overflowX="auto">
+            <Box className="editorial-card" p={{ base: 4, md: 6 }} overflowX="auto">
               <GitHubCalendar
                 username="ankit2341"
                 colorScheme="dark"
-                blockRadius={3}
+                blockRadius={2}
                 style={{ maxWidth: '100%' }}
               />
             </Box>
             <Center mt={6}>
               <Image
-                src="https://github-readme-stats.vercel.app/api?username=ankit2341&show_icons=true&theme=vue-dark&hide_border=true&bg_color=171512&title_color=e9b872&text_color=a8a196&icon_color=e9b872"
+                src="https://github-readme-stats.vercel.app/api?username=ankit2341&show_icons=true&hide_border=true&bg_color=111111&title_color=ede8dc&text_color=8a857b&icon_color=b8916a"
                 alt="GitHub Stats"
-                borderRadius="lg"
+                borderRadius="md"
               />
             </Center>
           </Box>
@@ -112,50 +113,50 @@ export default function Home() {
         <ContactSection />
       </VStack>
 
-      {/* Footer */}
       <Box
         as="footer"
         w="100%"
         borderTop="1px solid"
         borderColor="brand.border"
-        py={8}
+        py={10}
         px={{ base: 5, md: 8 }}
         mt={12}
       >
-        <VStack
-          maxW="1200px"
-          mx="auto"
-          gap={4}
-        >
+        <VStack maxW="1200px" mx="auto" gap={5}>
           <HStack gap={6}>
             <Link
               href="https://github.com/ankit2341"
               target="_blank"
               rel="noopener noreferrer"
               color="brand.muted"
-              _hover={{ color: 'brand.primary' }}
+              _hover={{ color: 'brand.accent' }}
             >
               <FontAwesomeIcon icon={faGithub} size="lg" />
             </Link>
             <Link
-              href="https://www.linkedin.com/in/ankit-patil-948036196/"
+              href="https://linkedin.com/in/ankit-patil-948036196"
               target="_blank"
               rel="noopener noreferrer"
               color="brand.muted"
-              _hover={{ color: 'brand.primary' }}
+              _hover={{ color: 'brand.accent' }}
             >
               <FontAwesomeIcon icon={faLinkedin} size="lg" />
             </Link>
+            <Link
+              href="mailto:ankitpatil2341@gmail.com"
+              color="brand.muted"
+              _hover={{ color: 'brand.accent' }}
+            >
+              <FontAwesomeIcon icon={faEnvelope} size="lg" />
+            </Link>
           </HStack>
-          <Text fontSize="sm" color="brand.muted" textAlign="center">
-            Designed &amp; built with care by{' '}
-            <Text as="span" color="brand.primary" fontWeight={500}>
-              Ankit Patil
-            </Text>{' '}
-            · © {new Date().getFullYear()}
-          </Text>
-          <Text className="hand" color="brand.primary" fontSize="xl">
-            keep sketching · keep shipping
+          <Text
+            fontSize="sm"
+            color="brand.muted"
+            textAlign="center"
+            letterSpacing="0.02em"
+          >
+            Ankit Patil · © {new Date().getFullYear()}
           </Text>
         </VStack>
       </Box>

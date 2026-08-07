@@ -4,6 +4,7 @@ import {
   Button,
   CloseButton,
   Drawer,
+  Flex,
   HStack,
   IconButton,
   Portal,
@@ -51,29 +52,30 @@ const Navbar = () => {
   if (!hydrated) return null;
 
   const Logo = (
-    <HStack gap={2}>
+    <HStack gap={3}>
       <Box
         w="34px"
         h="34px"
         borderRadius="full"
-        bg="brand.primary"
-        color="brand.background"
+        border="1px solid"
+        borderColor="brand.borderStrong"
+        color="brand.text"
         display="flex"
         alignItems="center"
         justifyContent="center"
         fontFamily="'Fraunces', serif"
-        fontWeight={700}
+        fontStyle="italic"
+        fontWeight={400}
         fontSize="lg"
-        boxShadow="0 4px 14px rgba(233,184,114,0.35)"
       >
-        A
+        a
       </Box>
       <Text
         fontFamily="'Fraunces', serif"
-        fontSize="xl"
-        fontWeight={600}
+        fontSize="lg"
+        fontWeight={400}
         color="brand.text"
-        letterSpacing="-0.02em"
+        letterSpacing="0.02em"
       >
         Ankit Patil
       </Text>
@@ -82,7 +84,7 @@ const Navbar = () => {
 
   if (isMobile) {
     return (
-      <Drawer.Root placement="end">
+      <Drawer.Root placement="end" size="xs">
         <Box
           as="nav"
           position="fixed"
@@ -92,8 +94,8 @@ const Navbar = () => {
           zIndex={50}
           px={5}
           py={3}
-          bg={scrolled ? 'rgba(15,14,12,0.85)' : 'transparent'}
-          backdropFilter={scrolled ? 'blur(12px)' : 'none'}
+          bg={scrolled ? 'rgba(10,10,10,0.85)' : 'transparent'}
+          backdropFilter={scrolled ? 'blur(14px)' : 'none'}
           borderBottom={scrolled ? '1px solid' : 'none'}
           borderColor="brand.border"
           transition="all 0.3s ease"
@@ -104,9 +106,10 @@ const Navbar = () => {
               <IconButton
                 aria-label="Open menu"
                 variant="outline"
-                borderColor="brand.border"
+                borderColor="brand.borderStrong"
                 color="brand.text"
-                _hover={{ bg: 'brand.surface', borderColor: 'brand.primary' }}
+                bg="transparent"
+                _hover={{ bg: 'brand.surface', borderColor: 'brand.text' }}
                 size="sm"
               >
                 <FontAwesomeIcon icon={faBars} />
@@ -116,54 +119,92 @@ const Navbar = () => {
         </Box>
 
         <Portal>
-          <Drawer.Backdrop bg="rgba(0,0,0,0.65)" backdropFilter="blur(4px)" />
+          <Drawer.Backdrop bg="rgba(0,0,0,0.72)" backdropFilter="blur(6px)" />
           <Drawer.Positioner>
-            <Drawer.Content bg="brand.background" borderLeft="1px solid" borderColor="brand.border">
-              <Drawer.Header borderBottom="1px solid" borderColor="brand.border">
-                <Drawer.Title>
-                  <Text fontFamily="'Fraunces', serif" fontSize="2xl" color="brand.text">
-                    Menu
-                  </Text>
-                </Drawer.Title>
-              </Drawer.Header>
-              <Drawer.Body>
-                <VStack align="stretch" gap={2} pt={4}>
-                  {NAV_LINKS.map((link) => (
+            <Drawer.Content
+              bg="brand.background"
+              borderLeft="1px solid"
+              borderColor="brand.border"
+            >
+              <Flex
+                align="center"
+                justify="space-between"
+                px={5}
+                py={4}
+                borderBottom="1px solid"
+                borderColor="brand.border"
+              >
+                <Text
+                  fontFamily="'Fraunces', serif"
+                  fontSize="xl"
+                  color="brand.text"
+                  letterSpacing="0.02em"
+                >
+                  Menu
+                </Text>
+                <Drawer.CloseTrigger asChild>
+                  <CloseButton
+                    color="brand.text"
+                    size="sm"
+                    position="static"
+                    _hover={{ color: 'brand.accent', bg: 'brand.surface' }}
+                  />
+                </Drawer.CloseTrigger>
+              </Flex>
+
+              <Drawer.Body px={5} py={6}>
+                <VStack align="stretch" gap={1}>
+                  {NAV_LINKS.map((link, i) => (
                     <Drawer.CloseTrigger key={link.href} asChild>
                       <NextLink href={link.href} passHref>
-                        <Button
-                          w="100%"
-                          justifyContent="flex-start"
-                          variant="ghost"
+                        <Box
+                          as="span"
+                          display="flex"
+                          alignItems="baseline"
+                          gap={4}
+                          py={4}
+                          borderBottom="1px solid"
+                          borderColor="brand.border"
                           color="brand.text"
-                          fontFamily="'Fraunces', serif"
-                          fontSize="xl"
-                          fontWeight={500}
-                          py={6}
-                          _hover={{ color: 'brand.primary', bg: 'brand.surface' }}
+                          cursor="pointer"
+                          _hover={{ color: 'brand.accent' }}
+                          transition="color 0.2s"
                         >
-                          {link.label}
-                        </Button>
+                          <Text
+                            fontSize="xs"
+                            color="brand.muted"
+                            letterSpacing="0.2em"
+                            minW="30px"
+                          >
+                            0{i + 1}
+                          </Text>
+                          <Text
+                            fontFamily="'Fraunces', serif"
+                            fontSize="2xl"
+                            fontWeight={400}
+                          >
+                            {link.label}
+                          </Text>
+                        </Box>
                       </NextLink>
                     </Drawer.CloseTrigger>
                   ))}
+
                   <Button
-                    mt={4}
-                    bg="brand.primary"
+                    mt={8}
+                    bg="brand.text"
                     color="brand.background"
                     borderRadius="full"
-                    fontWeight={600}
+                    fontWeight={500}
+                    py={6}
                     _hover={{ bg: 'brand.primaryDeep' }}
                     onClick={handleDownloadResume}
                   >
-                    <FontAwesomeIcon icon={faDownload} style={{ marginRight: 8 }} />
-                    Download Resume
+                    <FontAwesomeIcon icon={faDownload} style={{ marginRight: 10 }} />
+                    Download resume
                   </Button>
                 </VStack>
               </Drawer.Body>
-              <Drawer.CloseTrigger asChild>
-                <CloseButton color="brand.text" size="sm" />
-              </Drawer.CloseTrigger>
             </Drawer.Content>
           </Drawer.Positioner>
         </Portal>
@@ -181,7 +222,7 @@ const Navbar = () => {
       zIndex={50}
       px={{ base: 6, md: 12 }}
       py={4}
-      bg={scrolled ? 'rgba(15,14,12,0.75)' : 'transparent'}
+      bg={scrolled ? 'rgba(10,10,10,0.75)' : 'transparent'}
       backdropFilter={scrolled ? 'blur(14px)' : 'none'}
       borderBottom={scrolled ? '1px solid' : 'none'}
       borderColor="brand.border"
@@ -196,11 +237,10 @@ const Navbar = () => {
                 as="span"
                 color="brand.text"
                 fontSize="sm"
-                fontWeight={500}
+                fontWeight={400}
                 letterSpacing="0.02em"
                 cursor="pointer"
-                position="relative"
-                _hover={{ color: 'brand.primary' }}
+                _hover={{ color: 'brand.accent' }}
                 transition="color 0.2s"
               >
                 {link.label}
@@ -209,10 +249,10 @@ const Navbar = () => {
           ))}
           <Button
             size="sm"
-            bg="brand.primary"
+            bg="brand.text"
             color="brand.background"
             borderRadius="full"
-            fontWeight={600}
+            fontWeight={500}
             px={5}
             _hover={{ bg: 'brand.primaryDeep', transform: 'translateY(-1px)' }}
             transition="all 0.2s"

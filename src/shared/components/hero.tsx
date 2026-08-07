@@ -17,8 +17,8 @@ export default function Hero() {
       w="100%"
       maxW="1400px"
       mx="auto"
-      pt={{ base: 24, md: 32 }}
-      pb={{ base: 12, md: 20 }}
+      pt={{ base: 28, md: 36 }}
+      pb={{ base: 16, md: 24 }}
       px={{ base: 5, md: 12 }}
       minH={{ md: '100vh' }}
       display="flex"
@@ -26,25 +26,24 @@ export default function Hero() {
     >
       <Flex
         w="100%"
-        gap={{ base: 10, md: 16 }}
+        gap={{ base: 12, md: 20 }}
         align="center"
         flexDirection={{ base: 'column-reverse', md: 'row' }}
       >
-        {/* Left — copy */}
-        <VStack align={{ base: 'center', md: 'flex-start' }} gap={6} flex={1.2}>
+        <VStack align={{ base: 'center', md: 'flex-start' }} gap={7} flex={1.3}>
           <MotionBox
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
           >
             <HStack gap={3}>
-              <Box w="40px" h="1px" bg="brand.primary" />
-              <Text className="eyebrow">Full-stack developer &amp; artist</Text>
+              <Box className="rule" />
+              <Text className="eyebrow">Frontend Engineer, Navi Mumbai</Text>
             </HStack>
           </MotionBox>
 
           <MotionBox
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.2, 0.8, 0.2, 1] }}
           >
@@ -52,45 +51,50 @@ export default function Hero() {
               as="h1"
               fontFamily="'Fraunces', serif"
               fontSize={{ base: '4xl', sm: '5xl', md: '6xl', lg: '7xl' }}
-              fontWeight={700}
-              lineHeight={0.95}
+              fontWeight={400}
+              lineHeight={1.02}
               letterSpacing="-0.03em"
               color="brand.text"
               textAlign={{ base: 'center', md: 'left' }}
             >
-              I build software
+              Interfaces built
               <br />
-              <Text as="span" color="brand.primary" fontStyle="italic" fontWeight={500}>
-                the way I sketch
+              with{' '}
+              <Text as="span" color="brand.accent" fontStyle="italic" fontWeight={400}>
+                intention
               </Text>
-              <Text as="span" color="brand.text">
-                .
-              </Text>
+              .
             </Text>
           </MotionBox>
 
           <MotionBox
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.2, 0.8, 0.2, 1] }}
-            maxW="540px"
+            maxW="560px"
           >
             <Text
               fontSize={{ base: 'md', md: 'lg' }}
               color="brand.muted"
-              lineHeight={1.7}
+              lineHeight={1.75}
               textAlign={{ base: 'center', md: 'left' }}
             >
-              Hi, I&apos;m <Text as="span" color="brand.text" fontWeight={600}>Ankit Patil</Text> — a
-              full-stack engineer leading frontend at{' '}
-              <Text as="span" color="brand.primary" fontWeight={500}>Cloudgov</Text>. I care about
-              clean interfaces, small details, and the craft in every line — whether it&apos;s
-              TypeScript or graphite on paper.
+              I&apos;m{' '}
+              <Text as="span" color="brand.text" fontWeight={500}>
+                Ankit Patil
+              </Text>
+              , a full stack engineer with 3+ years shipping production React, Next.js and
+              TypeScript at{' '}
+              <Text as="span" color="brand.text" fontWeight={500}>
+                Cloudgov
+              </Text>
+              , a multi cloud FinOps and governance platform. I build design systems,
+              executive dashboards, and the occasional React Native app.
             </Text>
           </MotionBox>
 
           <MotionBox
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.2, 0.8, 0.2, 1] }}
           >
@@ -100,17 +104,21 @@ export default function Hero() {
                 display="inline-flex"
                 alignItems="center"
                 gap={2}
-                bg="brand.primary"
+                bg="brand.text"
                 color="brand.background"
-                px={6}
+                px={7}
                 py={3}
                 borderRadius="full"
-                fontWeight={600}
+                fontWeight={500}
                 fontSize="sm"
-                _hover={{ bg: 'brand.primaryDeep', textDecoration: 'none', transform: 'translateY(-1px)' }}
+                _hover={{
+                  bg: 'brand.primaryDeep',
+                  textDecoration: 'none',
+                  transform: 'translateY(-1px)',
+                }}
                 transition="all 0.2s"
               >
-                See my work
+                See selected work
                 <FontAwesomeIcon icon={faArrowDown} />
               </Link>
               <Link
@@ -119,14 +127,18 @@ export default function Hero() {
                 alignItems="center"
                 gap={2}
                 color="brand.text"
-                px={6}
+                px={7}
                 py={3}
                 borderRadius="full"
                 border="1px solid"
-                borderColor="brand.border"
+                borderColor="brand.borderStrong"
                 fontWeight={500}
                 fontSize="sm"
-                _hover={{ borderColor: 'brand.primary', color: 'brand.primary', textDecoration: 'none' }}
+                _hover={{
+                  borderColor: 'brand.text',
+                  color: 'brand.accent',
+                  textDecoration: 'none',
+                }}
                 transition="all 0.2s"
               >
                 <FontAwesomeIcon icon={faEnvelope} />
@@ -144,67 +156,34 @@ export default function Hero() {
             <HStack gap={5}>
               <SocialIcon href="https://github.com/ankit2341" icon={faGithub} />
               <SocialIcon
-                href="https://www.linkedin.com/in/ankit-patil-948036196/"
+                href="https://linkedin.com/in/ankit-patil-948036196"
                 icon={faLinkedin}
               />
-              <Box w="30px" h="1px" bg="brand.border" />
-              <Text fontSize="xs" color="brand.muted" letterSpacing="0.1em">
-                NAVI MUMBAI · IN
+              <Box w="24px" h="1px" bg="brand.borderStrong" />
+              <Text fontSize="xs" color="brand.muted" letterSpacing="0.24em">
+                NAVI MUMBAI · OPEN TO REMOTE
               </Text>
             </HStack>
           </MotionBox>
         </VStack>
 
-        {/* Right — sketch portrait */}
         <MotionBox
           flex={1}
           w="100%"
-          maxW={{ base: '280px', md: '380px' }}
-          initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
-          animate={{ opacity: 1, scale: 1, rotate: -2 }}
+          maxW={{ base: '260px', md: '340px' }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.2, 0.8, 0.2, 1] }}
           position="relative"
         >
           <Box className="portrait-frame">
             <Image
               src={AVATAR}
-              alt="Ankit Patil — pencil sketch"
+              alt="Ankit Patil"
               w="100%"
-              h={{ base: '280px', md: '380px' }}
+              h={{ base: '280px', md: '360px' }}
             />
-          </Box>
-
-          <Box
-            position="absolute"
-            top={{ base: '-30px', md: '-40px' }}
-            right={{ base: '-10px', md: '-30px' }}
-            transform="rotate(8deg)"
-          >
-            <Text
-              className="hand"
-              color="brand.primary"
-              fontSize={{ base: '2xl', md: '3xl' }}
-              lineHeight={1}
-              textShadow="0 2px 8px rgba(233,184,114,0.3)"
-            >
-              hey there!
-            </Text>
-          </Box>
-
-          <Box
-            position="absolute"
-            bottom={{ base: '-40px', md: '-50px' }}
-            left={{ base: '-20px', md: '-40px' }}
-            transform="rotate(-6deg)"
-          >
-            <Text
-              className="hand"
-              color="brand.muted"
-              fontSize={{ base: 'xl', md: '2xl' }}
-              lineHeight={1}
-            >
-              — self-portrait, graphite
-            </Text>
+            <Text className="portrait-caption">Ankit Patil, 2026</Text>
           </Box>
         </MotionBox>
       </Flex>
@@ -219,8 +198,8 @@ function SocialIcon({ href, icon }: { href: string; icon: typeof faGithub }) {
       target="_blank"
       rel="noopener noreferrer"
       color="brand.text"
-      fontSize="xl"
-      _hover={{ color: 'brand.primary', textDecoration: 'none' }}
+      fontSize="lg"
+      _hover={{ color: 'brand.accent', textDecoration: 'none' }}
       transition="color 0.2s"
     >
       <FontAwesomeIcon icon={icon} />
