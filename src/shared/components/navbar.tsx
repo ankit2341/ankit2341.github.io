@@ -1,5 +1,5 @@
 'use client';
-import { Box, Button, Flex, HStack, IconButton, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Flex, HStack, IconButton, Link as ChakraLink, Text, VStack } from '@chakra-ui/react';
 import { faDownload, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -240,8 +240,7 @@ const Navbar = () => {
                   Download resume
                 </Button>
                 <HStack gap={6} pt={2}>
-                  <Box
-                    as="a"
+                  <ChakraLink
                     href="https://github.com/ankit2341"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -249,9 +248,8 @@ const Navbar = () => {
                     _hover={{ color: 'brand.accent' }}
                   >
                     <FontAwesomeIcon icon={faGithub} size="lg" />
-                  </Box>
-                  <Box
-                    as="a"
+                  </ChakraLink>
+                  <ChakraLink
                     href="https://linkedin.com/in/ankit-patil-948036196"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -259,7 +257,7 @@ const Navbar = () => {
                     _hover={{ color: 'brand.accent' }}
                   >
                     <FontAwesomeIcon icon={faLinkedin} size="lg" />
-                  </Box>
+                  </ChakraLink>
                 </HStack>
               </VStack>
             </MotionText>
