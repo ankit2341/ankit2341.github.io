@@ -107,7 +107,7 @@ const SkillsSection = () => {
           Tools I <em>reach for</em>
         </Text>
         <Text color="brand.muted" fontSize={{ base: 'md', md: 'lg' }} maxW="600px">
-          A working set of technologies I've shipped production software with.
+          A working set of technologies I&apos;ve shipped production software with.
         </Text>
       </VStack>
 

@@ -75,7 +75,7 @@ const ProjectsSection = () => {
       <VStack align="start" gap={3} mb={16}>
         <Text className="eyebrow">03 — Selected work</Text>
         <Text className="section-heading">
-          Things I've <em>built</em>
+          Things I&apos;ve <em>built</em>
         </Text>
         <Text color="brand.muted" fontSize={{ base: 'md', md: 'lg' }} maxW="600px">
           A few side projects that let me play with new stacks and design ideas.

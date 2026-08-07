@@ -49,7 +49,7 @@ export default function ExperienceTimeline() {
       px={{ base: 5, md: 8 }}
     >
       <VStack align="start" gap={3} mb={16}>
-        <Text className="eyebrow">02 — Where I've been</Text>
+        <Text className="eyebrow">02 — Where I&apos;ve been</Text>
         <Text className="section-heading">
           Selected <em>experience</em>
         </Text>

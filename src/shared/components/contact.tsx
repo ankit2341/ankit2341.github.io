@@ -58,7 +58,7 @@ const ContactSection = () => {
       px={{ base: 5, md: 8 }}
     >
       <VStack align="start" gap={3} mb={16}>
-        <Text className="eyebrow">05 — Let's talk</Text>
+        <Text className="eyebrow">05 — Let&apos;s talk</Text>
         <Text className="section-heading">
           Say <em>hello</em>
         </Text>
