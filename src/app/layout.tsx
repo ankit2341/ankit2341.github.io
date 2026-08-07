@@ -3,13 +3,13 @@ import '@/app/globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Ankit Patil — Full Stack Developer & Artist',
+  title: 'Ankit Patil · Full Stack Engineer',
   description:
-    'Portfolio of Ankit Patil, a full-stack developer, design-driven engineer and pencil-sketch artist based in Navi Mumbai, India.',
+    'Portfolio of Ankit Patil, a frontend engineer with 3+ years shipping production React, Next.js and TypeScript at Cloudgov.',
   openGraph: {
-    title: 'Ankit Patil — Full Stack Developer & Artist',
+    title: 'Ankit Patil · Full Stack Engineer',
     description:
-      'Full-stack developer and pencil-sketch artist. React, Next.js, TypeScript, React Native.',
+      'Frontend engineer with 3+ years shipping production React, Next.js and TypeScript at Cloudgov.',
     type: 'website',
   },
 };
@@ -21,6 +21,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       <body>
         <Provider>
           <div className="site-background" aria-hidden="true"></div>
+          <div className="site-noise" aria-hidden="true"></div>
           <div className="site-content">{children}</div>
         </Provider>
       </body>
