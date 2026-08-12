@@ -3,8 +3,6 @@ import { Box, BoxProps } from '@chakra-ui/react';
 import { motion, useInView } from 'framer-motion';
 import { ReactNode, useRef } from 'react';
 
-const MotionBox = motion(Box);
-
 type RevealProps = BoxProps & {
   children: ReactNode;
   delay?: number;
@@ -21,18 +19,19 @@ export function Reveal({
   once = true,
   ...rest
 }: RevealProps) {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once, amount: 0.15 });
   return (
-    <MotionBox
-      ref={ref}
-      initial={{ opacity: 0, y, filter: 'blur(6px)' }}
-      animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-      transition={{ duration, delay, ease: [0.2, 0.8, 0.2, 1] }}
-      {...rest}
-    >
-      {children}
-    </MotionBox>
+    <Box ref={ref} {...rest}>
+      <motion.div
+        initial={{ opacity: 0, y, filter: 'blur(6px)' }}
+        animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+        transition={{ duration, delay, ease: [0.2, 0.8, 0.2, 1] }}
+        style={{ willChange: 'transform, opacity, filter' }}
+      >
+        {children}
+      </motion.div>
+    </Box>
   );
 }
 
@@ -51,7 +50,7 @@ export function SplitText({
   once = true,
   as = 'words',
 }: SplitTextProps) {
-  const ref = useRef(null);
+  const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once, amount: 0.3 });
   const units = as === 'words' ? text.split(' ') : text.split('');
 
@@ -71,7 +70,7 @@ export function SplitText({
           style={{ display: 'inline-block', whiteSpace: 'pre' }}
         >
           {unit}
-          {as === 'words' && i < units.length - 1 ? ' ' : ''}
+          {as === 'words' && i < units.length - 1 ? ' ' : ''}
         </motion.span>
       ))}
     </span>
