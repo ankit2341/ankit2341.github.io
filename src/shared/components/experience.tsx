@@ -1,8 +1,9 @@
 'use client';
 
-import { Box, Text, VStack, HStack, Flex, Badge } from '@chakra-ui/react';
-import { motion, useAnimation, useInView } from 'framer-motion';
+import { Box, Text, VStack, HStack, Flex, Badge, SimpleGrid } from '@chakra-ui/react';
+import { motion, useAnimation, useInView, useScroll, useTransform } from 'framer-motion';
 import { useEffect, useRef } from 'react';
+import { Reveal, SplitText } from './reveal';
 
 type Group = {
   heading: string;
@@ -72,28 +73,68 @@ const experiences: Experience[] = [
 ];
 
 const MotionBox = motion(Box);
+const MotionText = motion(Text);
 
 export default function ExperienceTimeline() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+  const numeralY = useTransform(scrollYProgress, [0, 1], [-100, 100]);
+  const numeralOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 0.4, 0.4, 0]);
+
   return (
     <Box
       id="experience"
       as="section"
+      ref={sectionRef}
+      position="relative"
       w="100%"
       maxW="1200px"
       mx="auto"
-      py={{ base: 20, md: 32 }}
+      py={{ base: 24, md: 40 }}
       px={{ base: 5, md: 8 }}
+      overflow="hidden"
     >
-      <VStack align="start" gap={3} mb={16}>
-        <Text className="eyebrow">02 / Experience</Text>
-        <Text className="section-heading">
-          Where I&apos;ve <em>shipped</em>.
-        </Text>
-        <Text color="brand.muted" fontSize={{ base: 'md', md: 'lg' }} maxW="600px" mt={2}>
-          Production work at Cloudgov, from the design system up through executive dashboards
-          and the mobile app.
-        </Text>
-      </VStack>
+      <MotionText
+        className="bg-numeral"
+        top="8%"
+        left={{ base: '-20px', md: '-40px' }}
+        fontSize={{ base: '180px', md: '320px' }}
+        style={{ y: numeralY, opacity: numeralOpacity }}
+        display={{ base: 'none', md: 'block' }}
+      >
+        03
+      </MotionText>
+
+      <SimpleGrid columns={{ base: 1, lg: 5 }} gap={{ base: 10, lg: 16 }} mb={16}>
+        <VStack align="start" gap={4} gridColumn={{ lg: 'span 2' }}>
+          <Reveal>
+            <Text className="eyebrow">03 / Experience</Text>
+          </Reveal>
+          <Text className="section-heading">
+            <SplitText text="Where I've" delay={0.1} stagger={0.06} />
+            <br />
+            <Text as="span" fontStyle="italic" opacity={0.7}>
+              <SplitText text="shipped." delay={0.5} stagger={0.06} />
+            </Text>
+          </Text>
+        </VStack>
+        <Reveal gridColumn={{ lg: 'span 3' }} delay={0.3}>
+          <Text
+            color="brand.muted"
+            fontSize={{ base: 'md', md: 'lg' }}
+            maxW="560px"
+            fontWeight={300}
+            lineHeight={1.8}
+            pt={{ lg: 8 }}
+          >
+            Production work at Cloudgov, from the design system up through executive
+            dashboards and the mobile app.
+          </Text>
+        </Reveal>
+      </SimpleGrid>
 
       <VStack gap={16} align="stretch">
         {experiences.map((exp, i) => (
@@ -106,7 +147,7 @@ export default function ExperienceTimeline() {
 
 function ExperienceCard({ exp }: { exp: Experience }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.15 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
   const controls = useAnimation();
 
   useEffect(() => {
@@ -119,10 +160,10 @@ function ExperienceCard({ exp }: { exp: Experience }) {
       initial="hidden"
       animate={controls}
       variants={{
-        hidden: { opacity: 0, y: 24 },
+        hidden: { opacity: 0, y: 40 },
         visible: { opacity: 1, y: 0 },
       }}
-      transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
+      transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
       className="editorial-card"
       p={{ base: 6, md: 10 }}
     >
@@ -136,22 +177,23 @@ function ExperienceCard({ exp }: { exp: Experience }) {
       >
         <Box>
           <Text
-            fontFamily="'Fraunces', serif"
-            fontSize={{ base: '2xl', md: '3xl' }}
+            fontFamily="'Instrument Serif', serif"
+            fontSize={{ base: '3xl', md: '4xl' }}
             fontWeight={400}
             color="brand.text"
             letterSpacing="-0.01em"
-            lineHeight={1.15}
+            lineHeight={1.05}
           >
             {exp.role}
           </Text>
           <Text
-            color="brand.accent"
+            color="brand.text"
             fontSize="md"
             fontWeight={400}
             mt={2}
-            fontFamily="'Fraunces', serif"
+            fontFamily="'Instrument Serif', serif"
             fontStyle="italic"
+            opacity={0.75}
           >
             {exp.company}
           </Text>
@@ -160,61 +202,82 @@ function ExperienceCard({ exp }: { exp: Experience }) {
           <Text
             color="brand.text"
             fontSize="sm"
-            fontWeight={500}
-            letterSpacing="0.02em"
+            fontWeight={400}
+            fontFamily="'DM Mono', monospace"
+            letterSpacing="0.05em"
           >
             {exp.duration}
           </Text>
-          <Text color="brand.muted" fontSize="xs" letterSpacing="0.02em">
+          <Text
+            color="brand.muted"
+            fontSize="xs"
+            fontFamily="'DM Mono', monospace"
+            letterSpacing="0.05em"
+          >
             {exp.location}
           </Text>
         </VStack>
       </Flex>
 
-      <Box h="1px" bg="brand.border" mb={8} />
+      <Box h="1px" bg="brand.border" mb={10} />
 
-      <VStack gap={10} align="stretch">
-        {exp.groups.map((group) => (
-          <Box key={group.heading}>
+      <VStack gap={12} align="stretch">
+        {exp.groups.map((group, gi) => (
+          <MotionBox
+            key={group.heading}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: gi * 0.1 }}
+          >
             <Text
               fontSize="xs"
               color="brand.muted"
               textTransform="uppercase"
               letterSpacing="0.24em"
-              fontWeight={500}
-              mb={4}
+              fontWeight={400}
+              mb={5}
+              fontFamily="'DM Mono', monospace"
             >
               {group.heading}
             </Text>
             <VStack align="stretch" gap={3}>
               {group.points.map((point, i) => (
-                <HStack key={i} align="flex-start" gap={4}>
-                  <Text
-                    color="brand.accent"
-                    fontSize="sm"
-                    mt={1}
-                    fontFamily="'Fraunces', serif"
-                    minW="20px"
-                  >
-                    0{i + 1}
-                  </Text>
-                  <Text
-                    fontSize={{ base: 'sm', md: 'md' }}
-                    color="brand.text"
-                    lineHeight={1.75}
-                    fontWeight={300}
-                    flex={1}
-                  >
-                    {point}
-                  </Text>
-                </HStack>
+                <MotionBox
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 0.5, delay: i * 0.05 }}
+                >
+                  <HStack align="flex-start" gap={4}>
+                    <Text
+                      color="brand.muted"
+                      fontSize="xs"
+                      mt={1.5}
+                      fontFamily="'DM Mono', monospace"
+                      minW="24px"
+                    >
+                      0{i + 1}
+                    </Text>
+                    <Text
+                      fontSize={{ base: 'sm', md: 'md' }}
+                      color="brand.text"
+                      lineHeight={1.75}
+                      fontWeight={300}
+                      flex={1}
+                    >
+                      {point}
+                    </Text>
+                  </HStack>
+                </MotionBox>
               ))}
             </VStack>
-          </Box>
+          </MotionBox>
         ))}
       </VStack>
 
-      <Box h="1px" bg="brand.border" my={8} />
+      <Box h="1px" bg="brand.border" my={10} />
 
       <HStack gap={2} flexWrap="wrap">
         {exp.tags.map((tag) => (
@@ -231,6 +294,7 @@ function ExperienceCard({ exp }: { exp: Experience }) {
             fontWeight={400}
             textTransform="none"
             letterSpacing="0.02em"
+            fontFamily="'DM Mono', monospace"
           >
             {tag}
           </Badge>

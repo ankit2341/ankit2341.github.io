@@ -63,7 +63,7 @@ const Navbar = () => {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        fontFamily="'Fraunces', serif"
+        fontFamily="'Instrument Serif', serif"
         fontStyle="italic"
         fontWeight={400}
         fontSize="lg"
@@ -71,7 +71,7 @@ const Navbar = () => {
         a
       </Box>
       <Text
-        fontFamily="'Fraunces', serif"
+        fontFamily="'Instrument Serif', serif"
         fontSize="lg"
         fontWeight={400}
         color="brand.text"
@@ -205,7 +205,7 @@ const Navbar = () => {
                         0{i + 1}
                       </Text>
                       <Text
-                        fontFamily="'Fraunces', serif"
+                        fontFamily="'Instrument Serif', serif"
                         fontSize={{ base: '3xl', sm: '4xl' }}
                         fontWeight={400}
                       >

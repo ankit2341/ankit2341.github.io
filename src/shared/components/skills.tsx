@@ -1,6 +1,8 @@
 'use client';
 import { Box, Text, Flex, Image, SimpleGrid, VStack } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import { Reveal, SplitText } from './reveal';
 
 type Skill = { title: string; src: string };
 
@@ -59,8 +61,8 @@ const groups: { group: string; items: Skill[] }[] = [
         title: 'Redux',
         src: 'https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/redux/redux-original.svg',
       },
-      { title: 'Zustand', src: 'https://img.icons8.com/?size=100&id=98973&format=png&color=b8916a' },
-      { title: 'Formik', src: 'https://img.icons8.com/?size=100&id=8SNbLwYQVdaJ&format=png&color=b8916a' },
+      { title: 'Zustand', src: 'https://img.icons8.com/?size=100&id=98973&format=png&color=ede9dc' },
+      { title: 'Formik', src: 'https://img.icons8.com/?size=100&id=8SNbLwYQVdaJ&format=png&color=ede9dc' },
     ],
   },
   {
@@ -154,36 +156,76 @@ const groups: { group: string; items: Skill[] }[] = [
 ];
 
 const MotionBox = motion(Box);
+const MotionText = motion(Text);
 
 const SkillsSection = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+  const numeralY = useTransform(scrollYProgress, [0, 1], [-100, 100]);
+  const numeralOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 0.4, 0.4, 0]);
+
   return (
     <Box
       id="skills"
       as="section"
+      ref={sectionRef}
+      position="relative"
       w="100%"
       maxW="1200px"
       mx="auto"
-      py={{ base: 20, md: 32 }}
+      py={{ base: 24, md: 40 }}
       px={{ base: 5, md: 8 }}
+      overflow="hidden"
     >
-      <VStack align="start" gap={3} mb={16}>
-        <Text className="eyebrow">04 / Toolbox</Text>
-        <Text className="section-heading">
-          Tools I <em>reach for</em>.
-        </Text>
-        <Text color="brand.muted" fontSize={{ base: 'md', md: 'lg' }} maxW="600px" mt={2}>
-          A working set of technologies I&apos;ve shipped production software with.
-        </Text>
-      </VStack>
+      <MotionText
+        className="bg-numeral"
+        top="8%"
+        left={{ base: '-20px', md: '-40px' }}
+        fontSize={{ base: '180px', md: '320px' }}
+        style={{ y: numeralY, opacity: numeralOpacity }}
+        display={{ base: 'none', md: 'block' }}
+      >
+        05
+      </MotionText>
 
-      <VStack gap={12} align="stretch">
+      <SimpleGrid columns={{ base: 1, lg: 5 }} gap={{ base: 10, lg: 16 }} mb={16}>
+        <VStack align="start" gap={4} gridColumn={{ lg: 'span 2' }}>
+          <Reveal>
+            <Text className="eyebrow">05 / Toolbox</Text>
+          </Reveal>
+          <Text className="section-heading">
+            <SplitText text="Tools I" delay={0.1} stagger={0.08} />
+            <br />
+            <Text as="span" fontStyle="italic" opacity={0.7}>
+              <SplitText text="reach for." delay={0.4} stagger={0.06} />
+            </Text>
+          </Text>
+        </VStack>
+        <Reveal gridColumn={{ lg: 'span 3' }} delay={0.3}>
+          <Text
+            color="brand.muted"
+            fontSize={{ base: 'md', md: 'lg' }}
+            maxW="560px"
+            fontWeight={300}
+            lineHeight={1.8}
+            pt={{ lg: 8 }}
+          >
+            A working set of technologies I&apos;ve shipped production software with.
+          </Text>
+        </Reveal>
+      </SimpleGrid>
+
+      <VStack gap={0} align="stretch">
         {groups.map((group, gi) => (
           <MotionBox
             key={group.group}
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, delay: gi * 0.05 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.7, delay: gi * 0.05, ease: [0.2, 0.8, 0.2, 1] }}
           >
             <Flex
               align={{ base: 'flex-start', md: 'center' }}
@@ -191,12 +233,12 @@ const SkillsSection = () => {
               flexDirection={{ base: 'column', md: 'row' }}
               borderTop="1px solid"
               borderColor="brand.border"
-              pt={6}
+              py={8}
             >
-              <Box minW={{ md: '180px' }}>
+              <Box minW={{ md: '200px' }}>
                 <Text
-                  fontFamily="'Fraunces', serif"
-                  fontSize="xl"
+                  fontFamily="'Instrument Serif', serif"
+                  fontSize={{ base: 'xl', md: '2xl' }}
                   fontStyle="italic"
                   color="brand.text"
                   fontWeight={400}
@@ -206,26 +248,41 @@ const SkillsSection = () => {
               </Box>
               <Box flex={1} w="100%">
                 <SimpleGrid columns={{ base: 3, sm: 4, md: 5, lg: 6 }} gap={3}>
-                  {group.items.map((skill) => (
-                    <VStack
+                  {group.items.map((skill, si) => (
+                    <MotionBox
                       key={skill.title}
-                      className="editorial-card"
-                      p={4}
-                      gap={2}
-                      minH="100px"
-                      justify="center"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: si * 0.04 }}
+                      whileHover={{ y: -3, transition: { duration: 0.2 } }}
                     >
-                      <Image src={skill.src} alt={skill.title} boxSize="30px" objectFit="contain" />
-                      <Text
-                        fontSize="xs"
-                        color="brand.muted"
-                        fontWeight={400}
-                        textAlign="center"
-                        lineHeight={1.3}
+                      <VStack
+                        className="editorial-card"
+                        p={4}
+                        gap={2}
+                        minH="100px"
+                        justify="center"
                       >
-                        {skill.title}
-                      </Text>
-                    </VStack>
+                        <Image
+                          src={skill.src}
+                          alt={skill.title}
+                          boxSize="30px"
+                          objectFit="contain"
+                          filter="grayscale(0.4)"
+                        />
+                        <Text
+                          fontSize="xs"
+                          color="brand.muted"
+                          fontWeight={400}
+                          textAlign="center"
+                          lineHeight={1.3}
+                          fontFamily="'DM Mono', monospace"
+                        >
+                          {skill.title}
+                        </Text>
+                      </VStack>
+                    </MotionBox>
                   ))}
                 </SimpleGrid>
               </Box>

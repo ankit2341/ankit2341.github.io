@@ -6,21 +6,14 @@ import Hero from '@/shared/components/hero';
 import Navbar from '@/shared/components/navbar';
 import ProjectsSection from '@/shared/components/project';
 import SkillsSection from '@/shared/components/skills';
-import {
-  Box,
-  Center,
-  HStack,
-  Image,
-  Link,
-  Text,
-  useBreakpointValue,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, HStack, Link, Text, VStack } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import GitHubCalendar from 'react-github-calendar';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { useEffect, useRef } from 'react';
+
+const MotionBox = motion(Box);
 
 function CursorFollower() {
   const dotRef = useRef<HTMLDivElement>(null);
@@ -62,11 +55,20 @@ function CursorFollower() {
   );
 }
 
-export default function Home() {
-  const isDesktop = useBreakpointValue({ base: false, lg: true });
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+  return <MotionBox className="scroll-progress" style={{ scaleX, width: '100%' }} />;
+}
 
+export default function Home() {
   return (
     <>
+      <ScrollProgress />
       <CursorFollower />
       <Navbar />
 
@@ -76,40 +78,6 @@ export default function Home() {
         <ExperienceTimeline />
         <ProjectsSection />
         <SkillsSection />
-
-        {isDesktop && (
-          <Box
-            as="section"
-            w="100%"
-            maxW="1200px"
-            mx="auto"
-            py={{ base: 12, md: 20 }}
-            px={{ base: 5, md: 8 }}
-          >
-            <VStack align="start" gap={3} mb={10}>
-              <Text className="eyebrow">06 / Activity</Text>
-              <Text className="section-heading">
-                Recent <em>commits</em>.
-              </Text>
-            </VStack>
-            <Box className="editorial-card" p={{ base: 4, md: 6 }} overflowX="auto">
-              <GitHubCalendar
-                username="ankit2341"
-                colorScheme="dark"
-                blockRadius={2}
-                style={{ maxWidth: '100%' }}
-              />
-            </Box>
-            <Center mt={6}>
-              <Image
-                src="https://github-readme-stats.vercel.app/api?username=ankit2341&show_icons=true&hide_border=true&bg_color=111111&title_color=ede8dc&text_color=8a857b&icon_color=b8916a"
-                alt="GitHub Stats"
-                borderRadius="md"
-              />
-            </Center>
-          </Box>
-        )}
-
         <ContactSection />
       </VStack>
 
@@ -118,18 +86,27 @@ export default function Home() {
         w="100%"
         borderTop="1px solid"
         borderColor="brand.border"
-        py={10}
+        py={12}
         px={{ base: 5, md: 8 }}
         mt={12}
       >
         <VStack maxW="1200px" mx="auto" gap={5}>
+          <Text
+            fontFamily="'Instrument Serif', serif"
+            fontStyle="italic"
+            fontSize="3xl"
+            color="brand.text"
+          >
+            thanks for scrolling.
+          </Text>
           <HStack gap={6}>
             <Link
               href="https://github.com/ankit2341"
               target="_blank"
               rel="noopener noreferrer"
               color="brand.muted"
-              _hover={{ color: 'brand.accent' }}
+              _hover={{ color: 'brand.text' }}
+              transition="color 0.2s"
             >
               <FontAwesomeIcon icon={faGithub} size="lg" />
             </Link>
@@ -138,23 +115,27 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
               color="brand.muted"
-              _hover={{ color: 'brand.accent' }}
+              _hover={{ color: 'brand.text' }}
+              transition="color 0.2s"
             >
               <FontAwesomeIcon icon={faLinkedin} size="lg" />
             </Link>
             <Link
               href="mailto:ankitpatil2341@gmail.com"
               color="brand.muted"
-              _hover={{ color: 'brand.accent' }}
+              _hover={{ color: 'brand.text' }}
+              transition="color 0.2s"
             >
               <FontAwesomeIcon icon={faEnvelope} size="lg" />
             </Link>
           </HStack>
           <Text
-            fontSize="sm"
+            fontSize="xs"
             color="brand.muted"
             textAlign="center"
-            letterSpacing="0.02em"
+            letterSpacing="0.24em"
+            fontFamily="'DM Mono', monospace"
+            textTransform="uppercase"
           >
             Ankit Patil · © {new Date().getFullYear()}
           </Text>
