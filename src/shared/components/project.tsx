@@ -53,8 +53,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     target: cardRef,
     offset: ['start end', 'end start'],
   });
-  const imgY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
-  const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1.05, 1.15]);
+  const imgY = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
+  const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.2, 1.1, 1.2]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.5, 0.2, 0.5]);
 
   return (
     <MotionBox
@@ -65,9 +66,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       transition={{ duration: 0.9, delay: index * 0.1, ease: [0.2, 0.8, 0.2, 1] }}
       className="editorial-card"
       overflow="hidden"
-      mt={{ lg: index % 2 === 1 ? 16 : 0 }}
+      mt={{ lg: index % 2 === 1 ? 12 : 0 }}
     >
-      <Box position="relative" overflow="hidden" h={{ base: '260px', md: '360px' }}>
+      <Box position="relative" overflow="hidden" h={{ base: '240px', md: '340px' }}>
         <MotionImage
           src={project.image}
           alt={project.title}
@@ -76,21 +77,21 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           w="100%"
           h="120%"
           style={{ y: imgY, scale: imgScale }}
-          filter="grayscale(0.15) contrast(1.02)"
         />
-        <Box
+        <MotionBox
           position="absolute"
           inset={0}
-          bgGradient="linear(to-t, rgba(11,11,10,0.7), transparent 45%)"
+          bg="linear-gradient(to top, rgba(10,10,10,0.85), transparent 45%)"
           pointerEvents="none"
+          style={{ opacity: overlayOpacity }}
         />
         <Text
           position="absolute"
           top={5}
           left={6}
-          color="brand.text"
+          color="white"
           fontSize="xs"
-          fontFamily="'DM Mono', monospace"
+          fontWeight={700}
           letterSpacing="0.24em"
           textShadow="0 1px 4px rgba(0,0,0,0.6)"
         >
@@ -98,28 +99,27 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </Text>
       </Box>
 
-      <VStack align="start" p={{ base: 6, md: 10 }} gap={5}>
+      <VStack align="start" p={{ base: 6, md: 8 }} gap={4}>
         <Text
           fontSize="xs"
           color="brand.muted"
           letterSpacing="0.24em"
           textTransform="uppercase"
-          fontFamily="'DM Mono', monospace"
-          fontWeight={400}
+          fontWeight={600}
         >
           {project.tagline}
         </Text>
         <Text
-          fontFamily="'Instrument Serif', serif"
-          fontSize={{ base: '3xl', md: '5xl' }}
-          fontWeight={400}
+          fontSize={{ base: '3xl', md: '4xl' }}
+          fontWeight={900}
           color="brand.text"
-          letterSpacing="-0.02em"
-          lineHeight={1}
+          letterSpacing="-0.03em"
+          lineHeight={0.95}
+          textTransform="uppercase"
         >
           {project.title}
         </Text>
-        <Text color="brand.muted" fontSize="md" lineHeight={1.75} fontWeight={300}>
+        <Text color="brand.muted" fontSize="md" lineHeight={1.7} fontWeight={400}>
           {project.description}
         </Text>
 
@@ -127,17 +127,16 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           {project.techNames.map((tech) => (
             <Badge
               key={tech}
-              bg="transparent"
-              color="brand.muted"
+              bg="brand.surfaceAlt"
+              color="brand.text"
               border="1px solid"
               borderColor="brand.border"
               px={3}
               py={1}
               borderRadius="full"
               fontSize="xs"
-              fontWeight={400}
+              fontWeight={500}
               textTransform="none"
-              fontFamily="'DM Mono', monospace"
             >
               {tech}
             </Badge>
@@ -151,7 +150,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               target="_blank"
               rel="noopener noreferrer"
               color="brand.text"
-              fontWeight={500}
+              fontWeight={600}
               fontSize="sm"
               display="inline-flex"
               alignItems="center"
@@ -168,7 +167,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             target="_blank"
             rel="noopener noreferrer"
             color="brand.muted"
-            fontWeight={500}
+            fontWeight={600}
             fontSize="sm"
             display="inline-flex"
             alignItems="center"
@@ -190,8 +189,9 @@ const ProjectsSection = () => {
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
-  const numeralY = useTransform(scrollYProgress, [0, 1], [-100, 100]);
-  const numeralOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 0.4, 0.4, 0]);
+  const numeralY = useTransform(scrollYProgress, [0, 1], [-140, 140]);
+  const numeralOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  const headingY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
     <Box
@@ -202,41 +202,43 @@ const ProjectsSection = () => {
       w="100%"
       maxW="1200px"
       mx="auto"
-      py={{ base: 24, md: 40 }}
-      px={{ base: 5, md: 8 }}
+      py={{ base: 16, md: 24 }}
+      px={{ base: 4, md: 8 }}
       overflow="hidden"
     >
       <MotionText
         className="bg-numeral"
-        top="8%"
-        right={{ base: '-20px', md: '-40px' }}
-        fontSize={{ base: '180px', md: '320px' }}
+        top="5%"
+        right={{ base: '-30px', md: '-60px' }}
+        fontSize={{ base: '220px', md: '440px' }}
         style={{ y: numeralY, opacity: numeralOpacity }}
         display={{ base: 'none', md: 'block' }}
       >
-        04
+        03
       </MotionText>
 
-      <SimpleGrid columns={{ base: 1, lg: 5 }} gap={{ base: 10, lg: 16 }} mb={16}>
-        <VStack align="start" gap={4} gridColumn={{ lg: 'span 2' }}>
-          <Reveal>
-            <Text className="eyebrow">04 / Selected work</Text>
-          </Reveal>
-          <Text className="section-heading">
-            <SplitText text="Things I've" delay={0.1} stagger={0.06} />
-            <br />
-            <Text as="span" fontStyle="italic" opacity={0.7}>
-              <SplitText text="built." delay={0.5} stagger={0.06} />
+      <SimpleGrid columns={{ base: 1, lg: 5 }} gap={{ base: 8, lg: 16 }} mb={12}>
+        <MotionBox gridColumn={{ lg: 'span 2' }} style={{ y: headingY }}>
+          <VStack align="start" gap={4}>
+            <Reveal>
+              <Text className="eyebrow">03 / Selected work</Text>
+            </Reveal>
+            <Text className="section-heading">
+              <SplitText text="Things I've" delay={0.1} stagger={0.06} />
+              <br />
+              <Text as="span" color="brand.muted" fontWeight={300}>
+                <SplitText text="built." delay={0.5} stagger={0.06} />
+              </Text>
             </Text>
-          </Text>
-        </VStack>
+          </VStack>
+        </MotionBox>
         <Reveal gridColumn={{ lg: 'span 3' }} delay={0.3}>
           <Text
             color="brand.muted"
             fontSize={{ base: 'md', md: 'lg' }}
             maxW="560px"
-            fontWeight={300}
-            lineHeight={1.8}
+            fontWeight={400}
+            lineHeight={1.75}
             pt={{ lg: 8 }}
           >
             Side projects to explore new stacks and design ideas end to end.
@@ -244,19 +246,19 @@ const ProjectsSection = () => {
         </Reveal>
       </SimpleGrid>
 
-      <SimpleGrid columns={{ base: 1, lg: 2 }} gap={8}>
+      <SimpleGrid columns={{ base: 1, lg: 2 }} gap={6}>
         {projects.map((project, i) => (
           <ProjectCard key={project.index} project={project} index={i} />
         ))}
       </SimpleGrid>
 
-      <Flex mt={16} justify="center">
+      <Flex mt={12} justify="center">
         <Link
           href="https://github.com/ankit2341?tab=repositories"
           target="_blank"
           rel="noopener noreferrer"
           color="brand.text"
-          fontWeight={500}
+          fontWeight={600}
           fontSize="sm"
           display="inline-flex"
           alignItems="center"

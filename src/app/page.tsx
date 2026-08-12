@@ -86,18 +86,20 @@ export default function Home() {
         w="100%"
         borderTop="1px solid"
         borderColor="brand.border"
-        py={12}
-        px={{ base: 5, md: 8 }}
-        mt={12}
+        py={10}
+        px={{ base: 4, md: 8 }}
+        mt={8}
       >
         <VStack maxW="1200px" mx="auto" gap={5}>
           <Text
-            fontFamily="'Instrument Serif', serif"
-            fontStyle="italic"
-            fontSize="3xl"
+            fontSize={{ base: '3xl', md: '5xl' }}
+            fontWeight={900}
             color="brand.text"
+            letterSpacing="-0.03em"
+            textTransform="uppercase"
+            textAlign="center"
           >
-            thanks for scrolling.
+            Thanks for scrolling
           </Text>
           <HStack gap={6}>
             <Link
@@ -134,7 +136,7 @@ export default function Home() {
             color="brand.muted"
             textAlign="center"
             letterSpacing="0.24em"
-            fontFamily="'DM Mono', monospace"
+            fontWeight={500}
             textTransform="uppercase"
           >
             Ankit Patil · © {new Date().getFullYear()}

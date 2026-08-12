@@ -18,10 +18,10 @@ const AVATAR = 'https://avatars.githubusercontent.com/u/103620239?v=4';
 
 const ROLES = [
   'Frontend Engineer',
-  'Design Systems Author',
-  'React & TypeScript',
-  'Next.js Practitioner',
-  'React Native Ships',
+  'Design Systems',
+  'React + TypeScript',
+  'Next.js practitioner',
+  'React Native shipper',
 ];
 
 const MARQUEE_WORDS = [
@@ -49,24 +49,23 @@ export default function Hero() {
     return () => clearInterval(id);
   }, []);
 
-  // Scroll-driven parallax + fade for hero content
+  // Scroll parallax
   const { scrollY } = useScroll();
-  const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);
-  const heroBlur = useTransform(scrollY, [0, 500], [0, 6]);
-  const heroBlurFilter = useTransform(heroBlur, (v) => `blur(${v}px)`);
-  const heroY = useTransform(scrollY, [0, 500], [0, 120]);
-  const portraitY = useTransform(scrollY, [0, 500], [0, -60]);
-  const portraitRotate = useTransform(scrollY, [0, 500], [0, 4]);
+  const heroOpacity = useTransform(scrollY, [0, 600], [1, 0]);
+  const nameY = useTransform(scrollY, [0, 600], [0, -120]);
+  const portraitY = useTransform(scrollY, [0, 600], [0, 180]);
+  const portraitRotate = useTransform(scrollY, [0, 600], [-4, 4]);
+  const bottomY = useTransform(scrollY, [0, 600], [0, 60]);
 
-  // Cursor tilt on portrait
+  // Cursor parallax on portrait
   const portraitRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), {
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), {
     stiffness: 150,
     damping: 20,
   });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), {
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), {
     stiffness: 150,
     damping: 20,
   });
@@ -90,242 +89,86 @@ export default function Hero() {
       position="relative"
       w="100%"
       minH={{ base: 'auto', md: '100vh' }}
-      pt={{ base: 28, md: 24 }}
-      pb={{ base: 16, md: 0 }}
+      pt={{ base: 24, md: 20 }}
+      pb={{ base: 10, md: 0 }}
       overflow="hidden"
       display="flex"
       alignItems="center"
+      style={{ opacity: heroOpacity as unknown as number }}
     >
-      {/* Ambient graphite smudges */}
-      <Box
-        className="hero-smudge"
-        top="10%"
-        left="-10%"
-        style={{ animation: 'float-slow 12s ease-in-out infinite' }}
-      />
-      <Box className="hero-smudge" bottom="10%" right="-10%" opacity={0.7} />
-
-      {/* Faint background numeral */}
-      <Text
-        className="bg-numeral"
-        top={{ base: '15%', md: '10%' }}
-        right={{ base: '-40px', md: '-60px' }}
-        fontSize={{ base: '200px', md: '380px' }}
-        opacity={0.35}
-        display={{ base: 'none', md: 'block' }}
-      >
-        01
-      </Text>
-
       <MotionBox
-        maxW="1400px"
-        mx="auto"
         w="100%"
-        px={{ base: 5, md: 12 }}
+        maxW="1500px"
+        mx="auto"
+        px={{ base: 4, md: 8 }}
         position="relative"
-        style={{ opacity: heroOpacity, filter: heroBlurFilter, y: heroY }}
+        style={{ opacity: heroOpacity }}
       >
-        <Flex
-          w="100%"
-          gap={{ base: 12, md: 16 }}
-          align={{ base: 'center', md: 'flex-end' }}
-          flexDirection={{ base: 'column-reverse', md: 'row' }}
+        {/* Top row: eyebrow + role */}
+        <MotionBox
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
         >
-          <VStack
-            align={{ base: 'center', md: 'flex-start' }}
-            gap={8}
-            flex={1.4}
-            textAlign={{ base: 'center', md: 'left' }}
+          <Flex
+            justify="space-between"
+            align="center"
+            mb={{ base: 8, md: 12 }}
+            flexWrap="wrap"
+            gap={2}
           >
-            <MotionBox
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
-            >
-              <HStack gap={3}>
-                <Box className="rule" />
-                <Text className="eyebrow">Portfolio · 2026</Text>
-              </HStack>
-            </MotionBox>
+            <HStack gap={3}>
+              <Box className="rule" />
+              <Text className="eyebrow">Portfolio · 2026</Text>
+            </HStack>
+            <HStack gap={3} display={{ base: 'none', md: 'flex' }}>
+              <Text className="eyebrow">Navi Mumbai · Remote OK</Text>
+              <Box className="rule" />
+            </HStack>
+          </Flex>
+        </MotionBox>
 
+        {/* Big name — with overlapping portrait */}
+        <Box position="relative" mb={{ base: 8, md: 12 }}>
+          <MotionBox style={{ y: nameY }}>
             <Box overflow="hidden">
               <Text
                 as="h1"
-                fontFamily="'Instrument Serif', serif"
-                fontSize={{ base: '5xl', sm: '6xl', md: '8xl', lg: '9xl' }}
-                fontWeight={400}
-                lineHeight={0.92}
-                letterSpacing="-0.03em"
-                color="brand.text"
+                className="display-huge"
+                fontSize={{ base: '20vw', sm: '18vw', md: '16vw', lg: '15rem' }}
+                textAlign="center"
+                letterSpacing={{ base: '-0.04em', md: '-0.06em' }}
               >
-                <SplitText text="Ankit" delay={0.1} stagger={0.06} as="chars" />
-                <br />
-                <Text as="span" fontStyle="italic" color="brand.muted">
-                  <SplitText text="Patil" delay={0.5} stagger={0.06} as="chars" />
-                </Text>
+                <SplitText text="ANKIT" delay={0.1} stagger={0.05} as="chars" />
               </Text>
             </Box>
-
-            <MotionBox
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.0 }}
-              minH={{ base: '30px', md: '40px' }}
-              display="flex"
-              alignItems="center"
-              justifyContent={{ base: 'center', md: 'flex-start' }}
-              w="100%"
-            >
-              <HStack gap={3} align="center">
-                <Text
-                  fontSize={{ base: 'md', md: 'lg' }}
-                  color="brand.muted"
-                  fontWeight={300}
-                >
-                  currently a
-                </Text>
-                <Box
-                  position="relative"
-                  minW={{ base: '180px', md: '280px' }}
-                  h={{ base: '28px', md: '36px' }}
-                  overflow="hidden"
-                >
-                  <AnimatePresence mode="wait">
-                    <MotionText
-                      key={roleIndex}
-                      position="absolute"
-                      left={0}
-                      top={0}
-                      color="brand.text"
-                      fontFamily="'Instrument Serif', serif"
-                      fontStyle="italic"
-                      fontWeight={400}
-                      fontSize={{ base: 'xl', md: '2xl' }}
-                      initial={{ y: 30, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -30, opacity: 0 }}
-                      transition={{ duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
-                    >
-                      {ROLES[roleIndex]}
-                    </MotionText>
-                  </AnimatePresence>
-                </Box>
-              </HStack>
-            </MotionBox>
-
-            <MotionBox
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 1.2 }}
-              maxW="520px"
-            >
+            <Box overflow="hidden">
               <Text
-                fontSize={{ base: 'md', md: 'lg' }}
+                as="div"
+                className="display-huge"
+                fontSize={{ base: '20vw', sm: '18vw', md: '16vw', lg: '15rem' }}
+                textAlign="center"
                 color="brand.muted"
-                lineHeight={1.75}
+                letterSpacing={{ base: '-0.04em', md: '-0.06em' }}
                 fontWeight={300}
               >
-                3+ years shipping production React, Next.js and TypeScript at{' '}
-                <Text as="span" color="brand.text" fontWeight={400}>
-                  Cloudgov
-                </Text>
-                . I build design systems, executive dashboards and the occasional React
-                Native app. Off the clock I sketch in graphite.
+                <SplitText text="PATIL" delay={0.5} stagger={0.05} as="chars" />
               </Text>
-            </MotionBox>
+            </Box>
+          </MotionBox>
 
-            <MotionBox
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 1.4 }}
-            >
-              <HStack gap={4} flexWrap="wrap" justify={{ base: 'center', md: 'flex-start' }}>
-                <Link
-                  href="#projects"
-                  display="inline-flex"
-                  alignItems="center"
-                  gap={2}
-                  bg="brand.text"
-                  color="brand.background"
-                  px={7}
-                  py={3}
-                  borderRadius="full"
-                  fontWeight={500}
-                  fontSize="sm"
-                  _hover={{
-                    bg: 'brand.primaryDeep',
-                    textDecoration: 'none',
-                    transform: 'translateY(-2px)',
-                  }}
-                  transition="all 0.3s"
-                >
-                  Selected work
-                  <FontAwesomeIcon icon={faArrowDown} />
-                </Link>
-                <Link
-                  href="#contact"
-                  display="inline-flex"
-                  alignItems="center"
-                  gap={2}
-                  color="brand.text"
-                  px={7}
-                  py={3}
-                  borderRadius="full"
-                  border="1px solid"
-                  borderColor="brand.borderStrong"
-                  fontWeight={500}
-                  fontSize="sm"
-                  _hover={{
-                    borderColor: 'brand.text',
-                    textDecoration: 'none',
-                    transform: 'translateY(-2px)',
-                  }}
-                  transition="all 0.3s"
-                >
-                  Say hello
-                </Link>
-              </HStack>
-            </MotionBox>
-
-            <MotionBox
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1.6 }}
-              pt={2}
-            >
-              <HStack gap={5}>
-                <SocialIcon href="https://github.com/ankit2341" icon={faGithub} />
-                <SocialIcon
-                  href="https://linkedin.com/in/ankit-patil-948036196"
-                  icon={faLinkedin}
-                />
-                <Box w="24px" h="1px" bg="brand.borderStrong" />
-                <Text
-                  fontSize="xs"
-                  color="brand.muted"
-                  letterSpacing="0.24em"
-                  fontFamily="'DM Mono', monospace"
-                >
-                  NAVI MUMBAI · REMOTE OK
-                </Text>
-              </HStack>
-            </MotionBox>
-          </VStack>
-
-          {/* Portrait */}
+          {/* Portrait — floats over the name, positioned right-center */}
           <MotionBox
-            flex={1}
-            w="100%"
-            maxW={{ base: '260px', md: '360px' }}
-            initial={{ opacity: 0, y: 40, scale: 0.94 }}
+            position="absolute"
+            top={{ base: '30%', md: '15%' }}
+            right={{ base: '50%', md: '5%' }}
+            transform={{ base: 'translateX(50%)', md: 'none' }}
+            w={{ base: '150px', md: '260px', lg: '300px' }}
+            zIndex={2}
+            initial={{ opacity: 0, y: 40, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1.2, delay: 0.3, ease: [0.2, 0.8, 0.2, 1] }}
-            position="relative"
-            style={{
-              perspective: '1200px',
-              y: portraitY,
-              rotate: portraitRotate,
-            }}
+            style={{ y: portraitY, rotate: portraitRotate, perspective: 1200 }}
           >
             <MotionBox
               ref={portraitRef}
@@ -335,69 +178,174 @@ export default function Hero() {
               position="relative"
             >
               <Box className="portrait-frame">
-                <Image src={AVATAR} alt="Ankit Patil" w="100%" h={{ base: '300px', md: '400px' }} />
+                <Image
+                  src={AVATAR}
+                  alt="Ankit Patil"
+                  w="100%"
+                  h={{ base: '180px', md: '280px', lg: '320px' }}
+                />
                 <Text className="portrait-caption">Ankit Patil</Text>
               </Box>
-            </MotionBox>
 
-            {/* Signature-style badge */}
-            <MotionBox
-              position="absolute"
-              top={{ base: '-14px', md: '-24px' }}
-              right={{ base: '-14px', md: '-30px' }}
-              px={3}
-              py={1.5}
-              borderRadius="full"
-              bg="brand.surface"
-              border="1px solid"
-              borderColor="brand.borderStrong"
-              fontSize="xs"
-              color="brand.text"
-              fontFamily="'DM Mono', monospace"
-              fontWeight={400}
-              boxShadow="0 12px 30px rgba(0,0,0,0.5)"
-              initial={{ opacity: 0, scale: 0.6, rotate: -20 }}
-              animate={{ opacity: 1, scale: 1, rotate: 6 }}
-              transition={{ duration: 0.9, delay: 1.4, type: 'spring' }}
-            >
-              <HStack gap={2}>
-                <Box w="6px" h="6px" borderRadius="full" bg="#a3e635" />
-                <Text>AVAILABLE</Text>
-              </HStack>
-            </MotionBox>
-
-            <MotionBox
-              position="absolute"
-              bottom={{ base: '-14px', md: '-24px' }}
-              left={{ base: '-14px', md: '-30px' }}
-              px={4}
-              py={1.5}
-              borderRadius="full"
-              bg="brand.surface"
-              border="1px solid"
-              borderColor="brand.borderStrong"
-              fontSize="sm"
-              color="brand.text"
-              fontFamily="'Instrument Serif', serif"
-              fontStyle="italic"
-              fontWeight={400}
-              boxShadow="0 12px 30px rgba(0,0,0,0.5)"
-              initial={{ opacity: 0, scale: 0.6, rotate: 15 }}
-              animate={{ opacity: 1, scale: 1, rotate: -5 }}
-              transition={{ duration: 0.9, delay: 1.6, type: 'spring' }}
-            >
-              3+ yrs at Cloudgov
+              {/* Availability sticker */}
+              <MotionBox
+                position="absolute"
+                top={{ base: '-10px', md: '-14px' }}
+                right={{ base: '-10px', md: '-16px' }}
+                px={3}
+                py={1.5}
+                borderRadius="full"
+                bg="brand.text"
+                color="brand.background"
+                fontSize="xs"
+                fontWeight={500}
+                letterSpacing="0.24em"
+                textTransform="uppercase"
+                boxShadow="0 8px 24px rgba(0,0,0,0.2)"
+                initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
+                animate={{ opacity: 1, scale: 1, rotate: 8 }}
+                transition={{ duration: 0.9, delay: 1.3, type: 'spring' }}
+              >
+                <HStack gap={2}>
+                  <Box w="6px" h="6px" borderRadius="full" bg="#4ade80" />
+                  <Text>Open</Text>
+                </HStack>
+              </MotionBox>
             </MotionBox>
           </MotionBox>
-        </Flex>
+        </Box>
+
+        {/* Bottom row: role + description + CTAs + socials */}
+        <MotionBox style={{ y: bottomY }}>
+          <Flex
+            gap={{ base: 8, md: 12 }}
+            align={{ base: 'stretch', md: 'flex-end' }}
+            justify="space-between"
+            flexDirection={{ base: 'column', md: 'row' }}
+            mt={{ base: 20, md: 0 }}
+          >
+            <MotionBox
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 1.0 }}
+              flex={1}
+              maxW="520px"
+            >
+              <HStack gap={2} align="baseline" mb={3}>
+                <Text fontSize={{ base: 'sm', md: 'md' }} color="brand.muted" fontWeight={400}>
+                  Currently a
+                </Text>
+                <Box
+                  position="relative"
+                  minW={{ base: '160px', md: '240px' }}
+                  h={{ base: '24px', md: '30px' }}
+                  overflow="hidden"
+                >
+                  <AnimatePresence mode="wait">
+                    <MotionText
+                      key={roleIndex}
+                      position="absolute"
+                      left={0}
+                      top={0}
+                      color="brand.text"
+                      fontWeight={700}
+                      fontSize={{ base: 'md', md: 'lg' }}
+                      letterSpacing="-0.01em"
+                      initial={{ y: 24, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -24, opacity: 0 }}
+                      transition={{ duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
+                    >
+                      {ROLES[roleIndex]}
+                    </MotionText>
+                  </AnimatePresence>
+                </Box>
+              </HStack>
+              <Text
+                fontSize={{ base: 'md', md: 'lg' }}
+                color="brand.muted"
+                lineHeight={1.65}
+                fontWeight={400}
+              >
+                3+ years shipping production React, Next.js and TypeScript at{' '}
+                <Text as="span" color="brand.text" fontWeight={700}>
+                  Cloudgov
+                </Text>
+                . Design systems, executive dashboards, and the occasional React Native app.
+              </Text>
+            </MotionBox>
+
+            <MotionBox
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 1.2 }}
+            >
+              <VStack align={{ base: 'stretch', md: 'flex-end' }} gap={4}>
+                <HStack gap={3} flexWrap="wrap" justify={{ base: 'center', md: 'flex-end' }}>
+                  <Link
+                    href="#projects"
+                    display="inline-flex"
+                    alignItems="center"
+                    gap={2}
+                    bg="brand.text"
+                    color="brand.background"
+                    px={6}
+                    py={3}
+                    borderRadius="full"
+                    fontWeight={600}
+                    fontSize="sm"
+                    _hover={{
+                      bg: 'brand.primaryDeep',
+                      textDecoration: 'none',
+                      transform: 'translateY(-2px)',
+                    }}
+                    transition="all 0.3s"
+                  >
+                    Selected work
+                    <FontAwesomeIcon icon={faArrowDown} />
+                  </Link>
+                  <Link
+                    href="#contact"
+                    display="inline-flex"
+                    alignItems="center"
+                    gap={2}
+                    color="brand.text"
+                    px={6}
+                    py={3}
+                    borderRadius="full"
+                    border="1px solid"
+                    borderColor="brand.borderStrong"
+                    fontWeight={600}
+                    fontSize="sm"
+                    _hover={{
+                      borderColor: 'brand.text',
+                      textDecoration: 'none',
+                      transform: 'translateY(-2px)',
+                    }}
+                    transition="all 0.3s"
+                  >
+                    Say hello
+                  </Link>
+                </HStack>
+                <HStack gap={4} justify={{ base: 'center', md: 'flex-end' }}>
+                  <SocialIcon href="https://github.com/ankit2341" icon={faGithub} />
+                  <SocialIcon
+                    href="https://linkedin.com/in/ankit-patil-948036196"
+                    icon={faLinkedin}
+                  />
+                </HStack>
+              </VStack>
+            </MotionBox>
+          </Flex>
+        </MotionBox>
 
         {/* Marquee */}
         <MotionBox
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.8 }}
-          mt={{ base: 12, md: 20 }}
-          py={5}
+          transition={{ duration: 1, delay: 1.5 }}
+          mt={{ base: 10, md: 14 }}
+          py={4}
           borderTop="1px solid"
           borderBottom="1px solid"
           borderColor="brand.border"
@@ -408,11 +356,11 @@ export default function Hero() {
               MARQUEE_WORDS.map((word, i) => (
                 <HStack key={`${r}-${i}`} gap={8}>
                   <Text
-                    fontFamily="'Instrument Serif', serif"
-                    fontStyle="italic"
-                    fontSize={{ base: 'xl', md: '3xl' }}
+                    fontSize={{ base: 'lg', md: '2xl' }}
                     color="brand.text"
-                    fontWeight={400}
+                    fontWeight={700}
+                    letterSpacing="-0.01em"
+                    textTransform="uppercase"
                   >
                     {word}
                   </Text>
@@ -424,33 +372,6 @@ export default function Hero() {
             )}
           </Flex>
         </MotionBox>
-      </MotionBox>
-
-      {/* Scroll cue */}
-      <MotionBox
-        position="absolute"
-        bottom={{ base: 4, md: 6 }}
-        left="50%"
-        style={{ x: '-50%', opacity: heroOpacity }}
-        display={{ base: 'none', md: 'block' }}
-      >
-        <VStack gap={2}>
-          <Text
-            fontSize="xs"
-            color="brand.muted"
-            fontFamily="'DM Mono', monospace"
-            letterSpacing="0.24em"
-          >
-            SCROLL
-          </Text>
-          <MotionBox
-            w="1px"
-            h="40px"
-            bg="brand.borderStrong"
-            animate={{ scaleY: [0.3, 1, 0.3], originY: 0 }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          />
-        </VStack>
       </MotionBox>
     </Box>
   );

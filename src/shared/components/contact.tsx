@@ -19,7 +19,7 @@ import { useRef, useState } from 'react';
 import { Reveal, SplitText } from './reveal';
 
 const inputStyle = {
-  bg: 'transparent',
+  bg: 'brand.surface',
   border: '1px solid',
   borderColor: 'brand.border',
   color: 'brand.text',
@@ -34,6 +34,7 @@ const inputStyle = {
   },
 };
 
+const MotionBox = motion(Box);
 const MotionText = motion(Text);
 
 const ContactSection = () => {
@@ -43,8 +44,9 @@ const ContactSection = () => {
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
-  const numeralY = useTransform(scrollYProgress, [0, 1], [-100, 100]);
-  const numeralOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 0.4, 0.4, 0]);
+  const numeralY = useTransform(scrollYProgress, [0, 1], [-140, 140]);
+  const numeralOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  const headingY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -67,64 +69,61 @@ const ContactSection = () => {
       w="100%"
       maxW="1200px"
       mx="auto"
-      py={{ base: 24, md: 40 }}
-      px={{ base: 5, md: 8 }}
+      py={{ base: 16, md: 24 }}
+      px={{ base: 4, md: 8 }}
       overflow="hidden"
     >
       <MotionText
         className="bg-numeral"
-        top="8%"
-        right={{ base: '-20px', md: '-40px' }}
-        fontSize={{ base: '180px', md: '320px' }}
+        top="5%"
+        right={{ base: '-30px', md: '-60px' }}
+        fontSize={{ base: '220px', md: '440px' }}
         style={{ y: numeralY, opacity: numeralOpacity }}
         display={{ base: 'none', md: 'block' }}
       >
-        06
+        05
       </MotionText>
 
-      <VStack
-        align={{ base: 'center', md: 'start' }}
-        gap={4}
-        mb={16}
-        textAlign={{ base: 'center', md: 'left' }}
-      >
-        <Reveal>
-          <Text className="eyebrow">06 / Contact</Text>
-        </Reveal>
-        <Text className="section-heading">
-          <SplitText text="Let's work" delay={0.1} stagger={0.08} />
-          <br />
-          <Text as="span" fontStyle="italic" opacity={0.7}>
-            <SplitText text="together." delay={0.5} stagger={0.06} />
+      <MotionBox style={{ y: headingY }}>
+        <VStack
+          align={{ base: 'center', md: 'start' }}
+          gap={4}
+          mb={12}
+          textAlign={{ base: 'center', md: 'left' }}
+        >
+          <Reveal>
+            <Text className="eyebrow">05 / Contact</Text>
+          </Reveal>
+          <Text className="section-heading">
+            <SplitText text="Let's work" delay={0.1} stagger={0.08} />
+            <br />
+            <Text as="span" color="brand.muted" fontWeight={300}>
+              <SplitText text="together." delay={0.5} stagger={0.06} />
+            </Text>
           </Text>
-        </Text>
-        <Reveal delay={0.3}>
-          <Text
-            color="brand.muted"
-            fontSize={{ base: 'md', md: 'lg' }}
-            maxW="560px"
-            fontWeight={300}
-            lineHeight={1.8}
-            pt={2}
-          >
-            Currently open to remote and hybrid roles. Reach out for full time work,
-            freelance, or just to say hello.
-          </Text>
-        </Reveal>
-      </VStack>
+          <Reveal delay={0.3}>
+            <Text
+              color="brand.muted"
+              fontSize={{ base: 'md', md: 'lg' }}
+              maxW="560px"
+              fontWeight={400}
+              lineHeight={1.75}
+              pt={2}
+            >
+              Currently open to remote and hybrid roles. Reach out for full time work,
+              freelance, or just to say hello.
+            </Text>
+          </Reveal>
+        </VStack>
+      </MotionBox>
 
-      <SimpleGrid columns={{ base: 1, lg: 2 }} gap={8}>
+      <SimpleGrid columns={{ base: 1, lg: 2 }} gap={6}>
         <Reveal delay={0.2}>
           <VStack align="stretch" gap={5} className="editorial-card" p={{ base: 6, md: 8 }} h="100%">
-            <Text
-              fontFamily="'Instrument Serif', serif"
-              fontSize="3xl"
-              fontStyle="italic"
-              color="brand.text"
-            >
+            <Text fontSize="2xl" fontWeight={800} color="brand.text" letterSpacing="-0.02em">
               Get in touch
             </Text>
-            <Text color="brand.muted" fontSize="sm" lineHeight={1.75} fontWeight={300}>
+            <Text color="brand.muted" fontSize="sm" lineHeight={1.75} fontWeight={400}>
               Email is the fastest way to reach me. Usually a reply within a day.
             </Text>
 
@@ -176,10 +175,11 @@ const ContactSection = () => {
 
             <Box mt={4} pt={4} borderTop="1px solid" borderColor="brand.border">
               <Text
-                fontFamily="'Instrument Serif', serif"
-                fontStyle="italic"
+                fontSize="lg"
+                fontWeight={800}
                 color="brand.text"
-                fontSize="2xl"
+                letterSpacing="-0.01em"
+                textTransform="uppercase"
               >
                 Ankit Patil
               </Text>
@@ -192,8 +192,7 @@ const ContactSection = () => {
             <Text
               fontSize="xs"
               color="brand.muted"
-              fontWeight={400}
-              fontFamily="'DM Mono', monospace"
+              fontWeight={600}
               letterSpacing="0.24em"
               textTransform="uppercase"
             >
@@ -224,7 +223,7 @@ const ContactSection = () => {
                 bg="brand.text"
                 color="brand.background"
                 _hover={{ bg: 'brand.primaryDeep', transform: 'translateY(-2px)' }}
-                fontWeight={500}
+                fontWeight={600}
                 borderRadius="full"
                 px={7}
                 w={{ base: '100%', sm: 'auto' }}
@@ -272,7 +271,7 @@ function ContactRow({
           color="brand.muted"
           textTransform="uppercase"
           letterSpacing="0.2em"
-          fontFamily="'DM Mono', monospace"
+          fontWeight={600}
         >
           {label}
         </Text>

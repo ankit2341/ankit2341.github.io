@@ -42,7 +42,7 @@ const groups: { group: string; items: Skill[] }[] = [
       { title: 'React Native', src: 'https://img.icons8.com/color/48/react-native.png' },
       {
         title: 'Expo',
-        src: 'https://img.icons8.com/?size=100&id=7ImWFDcPfSlz&format=png&color=ffffff',
+        src: 'https://img.icons8.com/?size=100&id=7ImWFDcPfSlz&format=png&color=000000',
       },
     ],
   },
@@ -61,8 +61,8 @@ const groups: { group: string; items: Skill[] }[] = [
         title: 'Redux',
         src: 'https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/redux/redux-original.svg',
       },
-      { title: 'Zustand', src: 'https://img.icons8.com/?size=100&id=98973&format=png&color=ede9dc' },
-      { title: 'Formik', src: 'https://img.icons8.com/?size=100&id=8SNbLwYQVdaJ&format=png&color=ede9dc' },
+      { title: 'Zustand', src: 'https://img.icons8.com/?size=100&id=98973&format=png&color=000000' },
+      { title: 'Formik', src: 'https://img.icons8.com/?size=100&id=8SNbLwYQVdaJ&format=png&color=000000' },
     ],
   },
   {
@@ -129,7 +129,7 @@ const groups: { group: string; items: Skill[] }[] = [
       },
       {
         title: 'AWS',
-        src: 'https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/aws-color.png',
+        src: 'https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/aws-color.png',
       },
       {
         title: 'Figma',
@@ -164,8 +164,9 @@ const SkillsSection = () => {
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
-  const numeralY = useTransform(scrollYProgress, [0, 1], [-100, 100]);
-  const numeralOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 0.4, 0.4, 0]);
+  const numeralY = useTransform(scrollYProgress, [0, 1], [-140, 140]);
+  const numeralOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  const headingY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
     <Box
@@ -176,41 +177,43 @@ const SkillsSection = () => {
       w="100%"
       maxW="1200px"
       mx="auto"
-      py={{ base: 24, md: 40 }}
-      px={{ base: 5, md: 8 }}
+      py={{ base: 16, md: 24 }}
+      px={{ base: 4, md: 8 }}
       overflow="hidden"
     >
       <MotionText
         className="bg-numeral"
-        top="8%"
-        left={{ base: '-20px', md: '-40px' }}
-        fontSize={{ base: '180px', md: '320px' }}
+        top="5%"
+        left={{ base: '-30px', md: '-60px' }}
+        fontSize={{ base: '220px', md: '440px' }}
         style={{ y: numeralY, opacity: numeralOpacity }}
         display={{ base: 'none', md: 'block' }}
       >
-        05
+        04
       </MotionText>
 
-      <SimpleGrid columns={{ base: 1, lg: 5 }} gap={{ base: 10, lg: 16 }} mb={16}>
-        <VStack align="start" gap={4} gridColumn={{ lg: 'span 2' }}>
-          <Reveal>
-            <Text className="eyebrow">05 / Toolbox</Text>
-          </Reveal>
-          <Text className="section-heading">
-            <SplitText text="Tools I" delay={0.1} stagger={0.08} />
-            <br />
-            <Text as="span" fontStyle="italic" opacity={0.7}>
-              <SplitText text="reach for." delay={0.4} stagger={0.06} />
+      <SimpleGrid columns={{ base: 1, lg: 5 }} gap={{ base: 8, lg: 16 }} mb={12}>
+        <MotionBox gridColumn={{ lg: 'span 2' }} style={{ y: headingY }}>
+          <VStack align="start" gap={4}>
+            <Reveal>
+              <Text className="eyebrow">04 / Toolbox</Text>
+            </Reveal>
+            <Text className="section-heading">
+              <SplitText text="Tools I" delay={0.1} stagger={0.08} />
+              <br />
+              <Text as="span" color="brand.muted" fontWeight={300}>
+                <SplitText text="reach for." delay={0.4} stagger={0.06} />
+              </Text>
             </Text>
-          </Text>
-        </VStack>
+          </VStack>
+        </MotionBox>
         <Reveal gridColumn={{ lg: 'span 3' }} delay={0.3}>
           <Text
             color="brand.muted"
             fontSize={{ base: 'md', md: 'lg' }}
             maxW="560px"
-            fontWeight={300}
-            lineHeight={1.8}
+            fontWeight={400}
+            lineHeight={1.75}
             pt={{ lg: 8 }}
           >
             A working set of technologies I&apos;ve shipped production software with.
@@ -233,15 +236,15 @@ const SkillsSection = () => {
               flexDirection={{ base: 'column', md: 'row' }}
               borderTop="1px solid"
               borderColor="brand.border"
-              py={8}
+              py={6}
             >
               <Box minW={{ md: '200px' }}>
                 <Text
-                  fontFamily="'Instrument Serif', serif"
                   fontSize={{ base: 'xl', md: '2xl' }}
-                  fontStyle="italic"
                   color="brand.text"
-                  fontWeight={400}
+                  fontWeight={800}
+                  letterSpacing="-0.02em"
+                  textTransform="uppercase"
                 >
                   {group.group}
                 </Text>
@@ -269,15 +272,13 @@ const SkillsSection = () => {
                           alt={skill.title}
                           boxSize="30px"
                           objectFit="contain"
-                          filter="grayscale(0.4)"
                         />
                         <Text
                           fontSize="xs"
                           color="brand.muted"
-                          fontWeight={400}
+                          fontWeight={500}
                           textAlign="center"
                           lineHeight={1.3}
-                          fontFamily="'DM Mono', monospace"
                         >
                           {skill.title}
                         </Text>

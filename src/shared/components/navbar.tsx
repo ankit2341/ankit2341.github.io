@@ -57,25 +57,22 @@ const Navbar = () => {
         w="34px"
         h="34px"
         borderRadius="full"
-        border="1px solid"
-        borderColor="brand.borderStrong"
-        color="brand.text"
+        bg="brand.text"
+        color="brand.background"
         display="flex"
         alignItems="center"
         justifyContent="center"
-        fontFamily="'Instrument Serif', serif"
-        fontStyle="italic"
-        fontWeight={400}
+        fontWeight={800}
         fontSize="lg"
       >
-        a
+        A
       </Box>
       <Text
-        fontFamily="'Instrument Serif', serif"
         fontSize="lg"
-        fontWeight={400}
+        fontWeight={700}
         color="brand.text"
-        letterSpacing="0.02em"
+        letterSpacing="-0.02em"
+        textTransform="uppercase"
       >
         Ankit Patil
       </Text>
@@ -91,15 +88,15 @@ const Navbar = () => {
         left={0}
         right={0}
         zIndex={60}
-        px={{ base: 5, md: 12 }}
+        px={{ base: 4, md: 8 }}
         py={4}
-        bg={scrolled || menuOpen ? 'rgba(10,10,10,0.85)' : 'transparent'}
+        bg={scrolled || menuOpen ? 'rgba(244,241,232,0.85)' : 'transparent'}
         backdropFilter={scrolled || menuOpen ? 'blur(14px)' : 'none'}
         borderBottom={scrolled ? '1px solid' : 'none'}
         borderColor="brand.border"
         transition="all 0.35s ease"
       >
-        <HStack justify="space-between" maxW="1400px" mx="auto">
+        <HStack justify="space-between" maxW="1500px" mx="auto">
           {Logo}
 
           <HStack gap={8} display={{ base: 'none', lg: 'flex' }}>
@@ -110,10 +107,10 @@ const Navbar = () => {
                   className="link-slide"
                   color="brand.text"
                   fontSize="sm"
-                  fontWeight={400}
+                  fontWeight={500}
                   letterSpacing="0.02em"
                   cursor="pointer"
-                  _hover={{ color: 'brand.accent' }}
+                  _hover={{ color: 'brand.muted' }}
                   transition="color 0.2s"
                 >
                   {link.label}
@@ -122,12 +119,12 @@ const Navbar = () => {
             ))}
             <Button
               size="sm"
-              bg="brand.accent"
+              bg="brand.text"
               color="brand.background"
               borderRadius="full"
-              fontWeight={500}
+              fontWeight={600}
               px={5}
-              _hover={{ bg: 'brand.accentDeep', transform: 'translateY(-1px)' }}
+              _hover={{ bg: 'brand.primaryDeep', transform: 'translateY(-1px)' }}
               transition="all 0.2s"
               onClick={handleDownloadResume}
             >
@@ -143,7 +140,7 @@ const Navbar = () => {
             borderColor="brand.borderStrong"
             color="brand.text"
             bg="transparent"
-            _hover={{ bg: 'brand.surface', borderColor: 'brand.accent' }}
+            _hover={{ bg: 'brand.surfaceAlt', borderColor: 'brand.text' }}
             size="sm"
             onClick={() => setMenuOpen((v) => !v)}
           >
@@ -162,7 +159,7 @@ const Navbar = () => {
             right={0}
             bottom={0}
             zIndex={55}
-            bg="rgba(10,10,10,0.98)"
+            bg="rgba(244,241,232,0.98)"
             backdropFilter="blur(24px)"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -193,7 +190,7 @@ const Navbar = () => {
                       color="brand.text"
                       cursor="pointer"
                       onClick={() => setMenuOpen(false)}
-                      _hover={{ color: 'brand.accent' }}
+                      _hover={{ color: 'brand.muted' }}
                       transition="color 0.2s"
                     >
                       <Text
@@ -201,13 +198,15 @@ const Navbar = () => {
                         color="brand.muted"
                         letterSpacing="0.2em"
                         minW="30px"
+                        fontWeight={600}
                       >
                         0{i + 1}
                       </Text>
                       <Text
-                        fontFamily="'Instrument Serif', serif"
                         fontSize={{ base: '3xl', sm: '4xl' }}
-                        fontWeight={400}
+                        fontWeight={900}
+                        letterSpacing="-0.03em"
+                        textTransform="uppercase"
                       >
                         {link.label}
                       </Text>
@@ -225,12 +224,12 @@ const Navbar = () => {
               <VStack gap={4} pb={4}>
                 <Button
                   w="100%"
-                  bg="brand.accent"
+                  bg="brand.text"
                   color="brand.background"
                   borderRadius="full"
-                  fontWeight={500}
+                  fontWeight={600}
                   py={6}
-                  _hover={{ bg: 'brand.accentDeep' }}
+                  _hover={{ bg: 'brand.primaryDeep' }}
                   onClick={() => {
                     handleDownloadResume();
                     setMenuOpen(false);
@@ -245,7 +244,7 @@ const Navbar = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     color="brand.muted"
-                    _hover={{ color: 'brand.accent' }}
+                    _hover={{ color: 'brand.text' }}
                   >
                     <FontAwesomeIcon icon={faGithub} size="lg" />
                   </ChakraLink>
@@ -254,7 +253,7 @@ const Navbar = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     color="brand.muted"
-                    _hover={{ color: 'brand.accent' }}
+                    _hover={{ color: 'brand.text' }}
                   >
                     <FontAwesomeIcon icon={faLinkedin} size="lg" />
                   </ChakraLink>

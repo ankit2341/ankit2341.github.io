@@ -81,8 +81,9 @@ export default function ExperienceTimeline() {
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
-  const numeralY = useTransform(scrollYProgress, [0, 1], [-100, 100]);
-  const numeralOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 0.4, 0.4, 0]);
+  const numeralY = useTransform(scrollYProgress, [0, 1], [-140, 140]);
+  const numeralOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  const headingY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
     <Box
@@ -93,41 +94,43 @@ export default function ExperienceTimeline() {
       w="100%"
       maxW="1200px"
       mx="auto"
-      py={{ base: 24, md: 40 }}
-      px={{ base: 5, md: 8 }}
+      py={{ base: 16, md: 24 }}
+      px={{ base: 4, md: 8 }}
       overflow="hidden"
     >
       <MotionText
         className="bg-numeral"
-        top="8%"
-        left={{ base: '-20px', md: '-40px' }}
-        fontSize={{ base: '180px', md: '320px' }}
+        top="5%"
+        left={{ base: '-30px', md: '-60px' }}
+        fontSize={{ base: '220px', md: '440px' }}
         style={{ y: numeralY, opacity: numeralOpacity }}
         display={{ base: 'none', md: 'block' }}
       >
-        03
+        02
       </MotionText>
 
-      <SimpleGrid columns={{ base: 1, lg: 5 }} gap={{ base: 10, lg: 16 }} mb={16}>
-        <VStack align="start" gap={4} gridColumn={{ lg: 'span 2' }}>
-          <Reveal>
-            <Text className="eyebrow">03 / Experience</Text>
-          </Reveal>
-          <Text className="section-heading">
-            <SplitText text="Where I've" delay={0.1} stagger={0.06} />
-            <br />
-            <Text as="span" fontStyle="italic" opacity={0.7}>
-              <SplitText text="shipped." delay={0.5} stagger={0.06} />
+      <SimpleGrid columns={{ base: 1, lg: 5 }} gap={{ base: 8, lg: 16 }} mb={12}>
+        <MotionBox gridColumn={{ lg: 'span 2' }} style={{ y: headingY }}>
+          <VStack align="start" gap={4}>
+            <Reveal>
+              <Text className="eyebrow">02 / Experience</Text>
+            </Reveal>
+            <Text className="section-heading">
+              <SplitText text="Where I've" delay={0.1} stagger={0.06} />
+              <br />
+              <Text as="span" color="brand.muted" fontWeight={300}>
+                <SplitText text="shipped." delay={0.5} stagger={0.06} />
+              </Text>
             </Text>
-          </Text>
-        </VStack>
+          </VStack>
+        </MotionBox>
         <Reveal gridColumn={{ lg: 'span 3' }} delay={0.3}>
           <Text
             color="brand.muted"
             fontSize={{ base: 'md', md: 'lg' }}
             maxW="560px"
-            fontWeight={300}
-            lineHeight={1.8}
+            fontWeight={400}
+            lineHeight={1.75}
             pt={{ lg: 8 }}
           >
             Production work at Cloudgov, from the design system up through executive
@@ -136,7 +139,7 @@ export default function ExperienceTimeline() {
         </Reveal>
       </SimpleGrid>
 
-      <VStack gap={16} align="stretch">
+      <VStack gap={12} align="stretch">
         {experiences.map((exp, i) => (
           <ExperienceCard key={i} exp={exp} />
         ))}
@@ -171,29 +174,26 @@ function ExperienceCard({ exp }: { exp: Experience }) {
         justify="space-between"
         flexWrap="wrap"
         gap={3}
-        mb={8}
+        mb={6}
         align={{ base: 'flex-start', md: 'center' }}
         flexDirection={{ base: 'column', md: 'row' }}
       >
         <Box>
           <Text
-            fontFamily="'Instrument Serif', serif"
-            fontSize={{ base: '3xl', md: '4xl' }}
-            fontWeight={400}
+            fontSize={{ base: '2xl', md: '3xl' }}
+            fontWeight={800}
             color="brand.text"
-            letterSpacing="-0.01em"
-            lineHeight={1.05}
+            letterSpacing="-0.02em"
+            lineHeight={1.1}
           >
             {exp.role}
           </Text>
           <Text
             color="brand.text"
             fontSize="md"
-            fontWeight={400}
-            mt={2}
-            fontFamily="'Instrument Serif', serif"
-            fontStyle="italic"
-            opacity={0.75}
+            fontWeight={500}
+            mt={1}
+            opacity={0.7}
           >
             {exp.company}
           </Text>
@@ -202,26 +202,26 @@ function ExperienceCard({ exp }: { exp: Experience }) {
           <Text
             color="brand.text"
             fontSize="sm"
-            fontWeight={400}
-            fontFamily="'DM Mono', monospace"
-            letterSpacing="0.05em"
+            fontWeight={600}
+            letterSpacing="0.02em"
+            textTransform="uppercase"
           >
             {exp.duration}
           </Text>
           <Text
             color="brand.muted"
             fontSize="xs"
-            fontFamily="'DM Mono', monospace"
-            letterSpacing="0.05em"
+            letterSpacing="0.02em"
+            textTransform="uppercase"
           >
             {exp.location}
           </Text>
         </VStack>
       </Flex>
 
-      <Box h="1px" bg="brand.border" mb={10} />
+      <Box h="1px" bg="brand.border" mb={8} />
 
-      <VStack gap={12} align="stretch">
+      <VStack gap={10} align="stretch">
         {exp.groups.map((group, gi) => (
           <MotionBox
             key={group.heading}
@@ -235,9 +235,8 @@ function ExperienceCard({ exp }: { exp: Experience }) {
               color="brand.muted"
               textTransform="uppercase"
               letterSpacing="0.24em"
-              fontWeight={400}
-              mb={5}
-              fontFamily="'DM Mono', monospace"
+              fontWeight={600}
+              mb={4}
             >
               {group.heading}
             </Text>
@@ -255,16 +254,17 @@ function ExperienceCard({ exp }: { exp: Experience }) {
                       color="brand.muted"
                       fontSize="xs"
                       mt={1.5}
-                      fontFamily="'DM Mono', monospace"
+                      fontWeight={600}
                       minW="24px"
+                      letterSpacing="0.05em"
                     >
                       0{i + 1}
                     </Text>
                     <Text
                       fontSize={{ base: 'sm', md: 'md' }}
                       color="brand.text"
-                      lineHeight={1.75}
-                      fontWeight={300}
+                      lineHeight={1.7}
+                      fontWeight={400}
                       flex={1}
                     >
                       {point}
@@ -277,24 +277,23 @@ function ExperienceCard({ exp }: { exp: Experience }) {
         ))}
       </VStack>
 
-      <Box h="1px" bg="brand.border" my={10} />
+      <Box h="1px" bg="brand.border" my={8} />
 
       <HStack gap={2} flexWrap="wrap">
         {exp.tags.map((tag) => (
           <Badge
             key={tag}
-            bg="transparent"
-            color="brand.muted"
+            bg="brand.surfaceAlt"
+            color="brand.text"
             border="1px solid"
             borderColor="brand.border"
             px={3}
             py={1}
             borderRadius="full"
             fontSize="xs"
-            fontWeight={400}
+            fontWeight={500}
             textTransform="none"
             letterSpacing="0.02em"
-            fontFamily="'DM Mono', monospace"
           >
             {tag}
           </Badge>
