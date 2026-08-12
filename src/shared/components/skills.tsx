@@ -55,7 +55,11 @@ const groups: { group: string; items: Skill[] }[] = [
       },
       {
         title: 'GraphQL',
-        src: 'https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/graphql/graphql-plain-wordmark.svg',
+        src: 'https://graphql.org/_next/static/media/logo.ad338028.svg',
+      },
+      {
+        title: 'TanStack Query',
+        src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7DVR8bGsyz4lL72etxCa_GyN0Jqw4wKuyK_p7COwlvg&s=10',
       },
       {
         title: 'Redux',
@@ -78,7 +82,6 @@ const groups: { group: string; items: Skill[] }[] = [
         title: 'Material UI',
         src: 'https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/materialui/materialui-original.svg',
       },
-      { title: 'Framer Motion', src: 'https://img.icons8.com/color/48/framer.png' },
     ],
   },
   {
@@ -98,7 +101,7 @@ const groups: { group: string; items: Skill[] }[] = [
       },
       {
         title: 'ClickHouse',
-        src: 'https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/clickhouse/clickhouse-original.svg',
+        src: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Clickhouse.png',
       },
     ],
   },
@@ -148,7 +151,7 @@ const groups: { group: string; items: Skill[] }[] = [
       { title: 'Okta SSO', src: 'https://www.okta.com/sites/default/files/Okta_Logo_BrightBlue_Medium.png' },
       {
         title: 'Stripe',
-        src: 'https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/stripe/stripe-original.svg',
+        src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtn_PCDxxE8fZWgO0UVgQD_H7KgZIoq4B3O6-OtTqFTg&s=10',
       },
       { title: 'Chart.js', src: 'https://www.chartjs.org/media/logo-title.svg' },
     ],

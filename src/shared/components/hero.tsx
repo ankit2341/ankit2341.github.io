@@ -117,14 +117,10 @@ export default function Hero() {
             flexWrap="wrap"
             gap={2}
           >
-            <HStack gap={3}>
-              <Box className="rule" />
-              <Text className="eyebrow">Portfolio · 2026</Text>
-            </HStack>
-            <HStack gap={3} display={{ base: 'none', md: 'flex' }}>
-              <Text className="eyebrow">Navi Mumbai · Remote OK</Text>
-              <Box className="rule" />
-            </HStack>
+            <Text className="eyebrow">Portfolio · 2026</Text>
+            <Text className="eyebrow" display={{ base: 'none', md: 'block' }}>
+              Navi Mumbai · Remote OK
+            </Text>
           </Flex>
         </MotionBox>
 
@@ -231,14 +227,19 @@ export default function Hero() {
               flex={1}
               maxW="520px"
             >
-              <HStack gap={2} align="baseline" mb={3}>
-                <Text fontSize={{ base: 'sm', md: 'md' }} color="brand.muted" fontWeight={400}>
+              <VStack align="stretch" gap={1} mb={4}>
+                <Text
+                  fontSize="xs"
+                  color="brand.muted"
+                  letterSpacing="0.24em"
+                  textTransform="uppercase"
+                  fontWeight={600}
+                >
                   Currently a
                 </Text>
                 <Box
                   position="relative"
-                  minW={{ base: '160px', md: '240px' }}
-                  h={{ base: '24px', md: '30px' }}
+                  h={{ base: '30px', md: '40px' }}
                   overflow="hidden"
                 >
                   <AnimatePresence mode="wait">
@@ -248,19 +249,19 @@ export default function Hero() {
                       left={0}
                       top={0}
                       color="brand.text"
-                      fontWeight={700}
-                      fontSize={{ base: 'md', md: 'lg' }}
-                      letterSpacing="-0.01em"
-                      initial={{ y: 24, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -24, opacity: 0 }}
+                      fontWeight={800}
+                      fontSize={{ base: 'xl', md: '2xl' }}
+                      letterSpacing="-0.02em"
+                      initial={{ y: '100%', opacity: 0 }}
+                      animate={{ y: '0%', opacity: 1 }}
+                      exit={{ y: '-100%', opacity: 0 }}
                       transition={{ duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
                     >
                       {ROLES[roleIndex]}
                     </MotionText>
                   </AnimatePresence>
                 </Box>
-              </HStack>
+              </VStack>
               <Text
                 fontSize={{ base: 'md', md: 'lg' }}
                 color="brand.muted"
