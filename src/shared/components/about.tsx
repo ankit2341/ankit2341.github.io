@@ -7,13 +7,6 @@ import { Reveal, SplitText } from './reveal';
 const MotionBox = motion(Box);
 const MotionText = motion(Text);
 
-const facts = [
-  { value: '3+', label: 'Years writing\nproduction code' },
-  { value: '2022', label: 'Started shipping\nas an engineer' },
-  { value: 'B.E.', label: 'In engineering,\nPune University' },
-  { value: '∞', label: 'Sketchbook\npages filled' },
-];
-
 const focus = [
   'Design systems',
   'Data heavy dashboards',
@@ -82,9 +75,9 @@ export default function AboutSection() {
               fontWeight={500}
               letterSpacing="-0.01em"
             >
-              A full stack engineer who lives on the frontend, based in Navi Mumbai and
-              open to remote. I got here through an engineering degree, a bootcamp at Masai,
-              and a lot of stubborn late nights.
+              Engineer by trade, sketch artist by weekend. I build for the web and for
+              mobile, and I&apos;m a lot more interested in whether the thing feels right
+              than which framework it was built with.
             </Text>
           </Reveal>
 
@@ -148,42 +141,6 @@ export default function AboutSection() {
               </Flex>
             </Box>
           </Reveal>
-
-          <SimpleGrid columns={{ base: 2, md: 4 }} gap={3} w="100%" pt={4}>
-            {facts.map((fact, i) => (
-              <Reveal key={fact.label} delay={0.6 + i * 0.08} y={30}>
-                <MotionBox
-                  className="editorial-card"
-                  p={4}
-                  h="100%"
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Text
-                    fontSize={{ base: '4xl', md: '5xl' }}
-                    fontWeight={900}
-                    color="brand.text"
-                    lineHeight={1}
-                    letterSpacing="-0.03em"
-                  >
-                    {fact.value}
-                  </Text>
-                  <Text
-                    color="brand.muted"
-                    fontSize="xs"
-                    mt={2}
-                    whiteSpace="pre-line"
-                    lineHeight={1.4}
-                    fontWeight={500}
-                    letterSpacing="0.02em"
-                    textTransform="uppercase"
-                  >
-                    {fact.label}
-                  </Text>
-                </MotionBox>
-              </Reveal>
-            ))}
-          </SimpleGrid>
         </VStack>
       </SimpleGrid>
     </Box>
